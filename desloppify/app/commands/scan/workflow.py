@@ -17,6 +17,10 @@ from desloppify.base.config import target_strict_score_from_config
 from desloppify.app.commands.scan.coverage import (
     coerce_int as _coerce_int,
 )
+from desloppify.app.commands.scan.codebase_assets import (
+    CodebaseAssetSyncResult,
+    ensure_codebase_agent_assets,
+)
 from desloppify.app.commands.scan.coverage import (
     persist_scan_coverage as _persist_scan_coverage,
 )
@@ -151,6 +155,7 @@ class ScanRuntime:
     reset_subjective_count: int = 0
     coverage_warnings: list[DetectorCoverageRecord] = field(default_factory=list)
     force_rescan: bool = False
+    asset_sync: CodebaseAssetSyncResult | None = None
 
 
 @dataclass
@@ -287,6 +292,7 @@ def prepare_scan_runtime(args: argparse.Namespace) -> ScanRuntime:
     coverage_warnings = _seed_runtime_coverage_warnings(lang)
     zone_overrides_raw = config.get("zone_overrides")
     zone_overrides = zone_overrides_raw if isinstance(zone_overrides_raw, dict) else None
+    asset_sync = ensure_codebase_agent_assets(get_project_root())
 
     return ScanRuntime(
         args=args,
@@ -302,6 +308,7 @@ def prepare_scan_runtime(args: argparse.Namespace) -> ScanRuntime:
         reset_subjective_count=reset_subjective_count,
         coverage_warnings=coverage_warnings,
         force_rescan=bool(getattr(args, "force_rescan", False)),
+        asset_sync=asset_sync,
     )
 
 

@@ -118,6 +118,9 @@ def test_run_scan_generation_uses_planning_scan_surface(monkeypatch) -> None:
 
 def test_prepare_scan_runtime_resets_script_import_caches(monkeypatch, tmp_path) -> None:
     calls: list[str] = []
+    asset_roots: list[object] = []
+    project_root = tmp_path / "repo"
+    project_root.mkdir()
     args = SimpleNamespace(
         path=str(tmp_path),
         reset_subjective=False,
@@ -160,8 +163,20 @@ def test_prepare_scan_runtime_resets_script_import_caches(monkeypatch, tmp_path)
         "_seed_runtime_coverage_warnings",
         lambda _lang: [],
     )
+    monkeypatch.setattr(
+        scan_workflow_mod,
+        "ensure_codebase_agent_assets",
+        lambda root: (asset_roots.append(root), "asset-sync-result")[1],
+    )
+    monkeypatch.setattr(
+        scan_workflow_mod,
+        "get_project_root",
+        lambda: project_root,
+    )
 
     runtime = scan_workflow_mod.prepare_scan_runtime(args)
 
     assert runtime.path == tmp_path
     assert calls == [str(tmp_path)]
+    assert runtime.asset_sync == "asset-sync-result"
+    assert asset_roots == [project_root]

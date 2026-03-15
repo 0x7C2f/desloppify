@@ -1,15 +1,29 @@
 import { execFile } from "node:child_process";
+import { access } from "node:fs/promises";
+import path from "node:path";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 const MCPORTER_BIN = process.env.MCPORTER_BIN ?? "/home/mrgrim/.npm-global/bin/mcporter";
-const MCPORTER_CONFIG = process.env.MCPORTER_CONFIG ?? "/home/mrgrim/.mcporter/mcporter.json";
+const GLOBAL_MCPORTER_CONFIG = process.env.MCPORTER_CONFIG ?? "/home/mrgrim/.mcporter/mcporter.json";
+
+async function resolveMcporterConfig() {
+  const projectConfig = path.resolve(process.cwd(), ".desloppify", "mcporter.json");
+
+  try {
+    await access(projectConfig);
+    return projectConfig;
+  } catch {
+    return GLOBAL_MCPORTER_CONFIG;
+  }
+}
 
 async function runMcporter(args) {
+  const configPath = await resolveMcporterConfig();
   try {
     const { stdout, stderr } = await execFileAsync(
       MCPORTER_BIN,
-      ["--config", MCPORTER_CONFIG, ...args],
+      ["--config", configPath, ...args],
       { maxBuffer: 10 * 1024 * 1024 }
     );
 
@@ -28,7 +42,7 @@ export const McporterPlugin = async (ctx) => {
     body: {
       service: "mcporter-plugin",
       level: "info",
-      message: `mcporter plugin loaded from desloppify using ${MCPORTER_CONFIG}`
+      message: `mcporter plugin loaded from desloppify using ${await resolveMcporterConfig()}`
     }
   });
 

@@ -107,6 +107,30 @@ def _show_coverage_preflight(runtime) -> None:
             print(colorize(f"    Fix: {remediation}", "dim"))
 
 
+def _show_asset_sync(runtime) -> None:
+    """Print project-local skill and MCP sync details for this scan."""
+    asset_sync = getattr(runtime, "asset_sync", None)
+    if not asset_sync:
+        return
+
+    if asset_sync.synced_skills:
+        print(
+            colorize(
+                "  * Synced project skills: " + ", ".join(asset_sync.synced_skills),
+                "dim",
+            )
+        )
+    if asset_sync.mcp_servers:
+        print(
+            colorize(
+                "  * Synced project MCPs: " + ", ".join(asset_sync.mcp_servers),
+                "dim",
+            )
+        )
+    for warning in getattr(asset_sync, "warnings", ()):
+        print(colorize(f"  * Asset sync: {warning}", "yellow"))
+
+
 def _print_plan_workflow_nudge(state: dict) -> None:
     _print_plan_workflow_nudge_impl(state)
 
@@ -140,6 +164,7 @@ def cmd_scan(args: argparse.Namespace) -> None:
             )
         )
     _show_coverage_preflight(runtime)
+    _show_asset_sync(runtime)
 
     issues, potentials, codebase_metrics = orchestrator.generate()
     merge = orchestrator.merge(issues, potentials, codebase_metrics)
