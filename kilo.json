@@ -1,0 +1,11 @@
+{
+  "plugin": [
+    "./plugins/skillnet.js",
+    "./plugins/mcporter.js"
+  ],
+  "skills": {
+    "paths": [
+      "./.desloppify/skills"
+    ]
+  }
+}

@@ -9,6 +9,13 @@ from desloppify.intelligence.review.feedback_contract import (
     max_batch_issues_for_dimension_count,
 )
 
+_PLUGIN_ASSISTANCE_BLOCK = (
+    "Plugin assistance:\n"
+    "- Use the shared SkillNet plugin when you need outside skill discovery or a quick view of the local skill inventory.\n"
+    "- Use the shared mcporter plugin when MCP server inspection or tool calls would speed up validation.\n"
+    "- Treat plugin output as supporting context only; all scoring and issue calls still require direct code reading.\n\n"
+)
+
 
 class PromptBatchPayload(TypedDict, total=False):
     """Typed packet batch contract used by prompt rendering."""
@@ -543,6 +550,7 @@ def render_scoring_frame() -> str:
         "how well the codebase serves a developer from that perspective. The dimension "
         "rubric above defines what good looks like. "
         "Cite specific observations that explain your judgment.\n\n"
+        + _PLUGIN_ASSISTANCE_BLOCK
     )
 
 

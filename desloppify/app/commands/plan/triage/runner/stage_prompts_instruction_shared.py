@@ -58,6 +58,17 @@ _OBSERVE_STRUCTURED_TEMPLATE = """\
 ```
 """
 
+_PLUGIN_USAGE_GUIDANCE = """\
+## Plugin Usage
+
+Use the shared `desloppify` plugins during your investigation when they add value:
+
+- **SkillNet plugin**: use it to discover relevant external skills or inspect the local skill inventory instead of assuming a built-in skill exists.
+- **mcporter plugin**: use it when you need to inspect or call configured MCP servers during analysis.
+
+These plugins are helpers, not a substitute for reading the code. Use them when they accelerate the work, then return to direct repository verification.
+"""
+
 _PREAMBLE_SELF_RECORD = """\
 You are a triage subagent with full codebase access and the desloppify CLI.
 Your job is to complete the **{stage}** stage of triage planning.
@@ -184,8 +195,8 @@ Valid values: trivial, small, medium, large. Set on steps via --effort flag.
 def triage_prompt_preamble(mode: PromptMode) -> str:
     """Return the shared prompt preamble for the requested runner mode."""
     if mode == "output_only":
-        return _PREAMBLE_OUTPUT_ONLY
-    return _PREAMBLE_SELF_RECORD
+        return _PREAMBLE_OUTPUT_ONLY + "\n\n" + _PLUGIN_USAGE_GUIDANCE
+    return _PREAMBLE_SELF_RECORD + "\n\n" + _PLUGIN_USAGE_GUIDANCE
 
 
 def render_cli_reference(cli_command: str = "desloppify") -> str:
