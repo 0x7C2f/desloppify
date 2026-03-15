@@ -7,13 +7,8 @@ import logging
 import os
 from importlib import metadata as importlib_metadata
 from pathlib import Path
+from typing import Any
 
-from desloppify.engine.planning.scorecard_dimensions import (
-    collapse_elegance_dimensions,
-    limit_scorecard_dimensions,
-    prepare_scorecard_dimensions,
-    resolve_scorecard_lang,
-)
 from desloppify.app.output.scorecard_parts.meta import (
     resolve_package_version,
     resolve_project_name,
@@ -35,15 +30,28 @@ from desloppify.app.output.scorecard_parts.theme import (
     score_color,
 )
 from desloppify.base.discovery.paths import get_project_root
+from desloppify.engine.planning.scorecard_dimensions import (
+    collapse_elegance_dimensions,
+    limit_scorecard_dimensions,
+    prepare_scorecard_dimensions,
+    resolve_scorecard_lang,
+)
 from desloppify.state_scoring import score_snapshot
 
 logger = logging.getLogger(__name__)
 
 
-def generate_scorecard(state: dict, output_path: str | Path) -> Path:
+def generate_scorecard(state: dict[str, Any], output_path: str | Path) -> Path:
     """Render a landscape scorecard PNG from scan state. Returns the output path."""
-    image_mod = importlib.import_module("PIL.Image")  # deferred: optional dependency
-    image_draw_mod = importlib.import_module("PIL.ImageDraw")  # deferred: optional dependency
+    try:
+        image_mod = importlib.import_module("PIL.Image")  # deferred: optional dependency
+        image_draw_mod = importlib.import_module("PIL.ImageDraw")  # deferred: optional dependency
+    except Exception as exc:
+        logger.error("Pillow (PIL) unavailable: %s", exc)
+        raise RuntimeError(
+            "Pillow (PIL) is required to generate a scorecard badge. Install it with `pip install Pillow` or `pip install \"desloppify[scorecard]\"`."
+        ) from exc
+    # Load scorecard drawing helpers (depends on PIL being available)
     scorecard_draw_mod = importlib.import_module("desloppify.app.output.scorecard_parts.draw")  # deferred: depends on PIL
 
     output_path = Path(output_path)
@@ -127,12 +135,12 @@ def generate_scorecard(state: dict, output_path: str | Path) -> Path:
     return output_path
 
 
-def get_badge_config(args, config: dict | None = None) -> tuple[Path | None, bool]:
+def get_badge_config(args: Any, config: dict[str, Any] | None = None) -> tuple[Path | None, bool]:
     """Resolve badge output path and whether badge generation is disabled.
 
     Returns (output_path, disabled). Checks CLI args, then config, then env vars.
     """
-    cfg = config or {}
+    cfg: dict[str, Any] = config or {}
     disabled = getattr(args, "no_badge", False)
     if not disabled:
         disabled = not cfg.get("generate_scorecard", True)
@@ -145,7 +153,7 @@ def get_badge_config(args, config: dict | None = None) -> tuple[Path | None, boo
     if disabled:
         return None, True
 
-    path_str = (
+    path_str: str = (
         getattr(args, "badge_path", None)
         or cfg.get("badge_path")
         or os.environ.get("DESLOPPIFY_BADGE_PATH", "scorecard.png")
@@ -159,9 +167,9 @@ def get_badge_config(args, config: dict | None = None) -> tuple[Path | None, boo
     return path, False
 
 
-def _scorecard_ignore_warning(state: dict) -> str | None:
+def _scorecard_ignore_warning(state: dict[str, Any]) -> str | None:
     """Return an ignore-suppression warning line for scorecard context."""
-    info = state.get("ignore_integrity", {}) if isinstance(state, dict) else {}
+    info = state.get("ignore_integrity", {})
     if not isinstance(info, dict):
         return None
     ignored = int(info.get("ignored", 0) or 0)

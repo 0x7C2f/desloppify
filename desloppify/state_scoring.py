@@ -4,6 +4,9 @@ Prefer `desloppify.state_score_snapshot` in new code. This module stays as a
 compatibility entrypoint for older imports.
 """
 
+from __future__ import annotations
+
+from desloppify.engine._state.schema import StateModel
 from desloppify.state_score_snapshot import (
     ScoreSnapshot,
     get_objective_score,
@@ -14,7 +17,7 @@ from desloppify.state_score_snapshot import (
 )
 
 
-def score_snapshot(state):
+def score_snapshot(state: StateModel) -> ScoreSnapshot:
     """Load all four canonical scores while honoring local monkeypatches."""
     return ScoreSnapshot(
         overall=get_overall_score(state),

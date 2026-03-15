@@ -2,22 +2,26 @@
 
 from __future__ import annotations
 
+import argparse
 import logging
 import os
 from pathlib import Path
+from typing import Any, Callable
 
-from desloppify.app.commands.helpers.dynamic_loaders import load_optional_scorecard_module
+from desloppify.app.commands.helpers.dynamic_loaders import (
+    load_optional_scorecard_module,
+)
 from desloppify.app.commands.scan.contracts import ScanQueryPayload
 from desloppify.app.commands.scan.workflow import (
     ScanMergeResult,
     ScanNoiseSnapshot,
 )
 from desloppify.base.config import config_for_query
+from desloppify.base.discovery.paths import get_project_root
 from desloppify.base.exception_sets import PLAN_LOAD_EXCEPTIONS
+from desloppify.base.output.contract import OutputResult
 from desloppify.base.output.fallbacks import log_best_effort_failure
 from desloppify.base.output.terminal import colorize
-from desloppify.base.output.contract import OutputResult
-from desloppify.base.discovery.paths import get_project_root
 from desloppify.engine._scoring.results.core import compute_health_breakdown
 from desloppify.engine._state.filtering import open_scope_breakdown
 from desloppify.engine.plan_state import load_plan
@@ -91,10 +95,12 @@ def build_scan_query_payload(
     return payload
 
 
-def _load_scorecard_helpers():
+def _load_scorecard_helpers() -> tuple[Callable[..., Any] | None, Callable[..., tuple[Path | None, bool]] | None]:
     """Load scorecard helper callables lazily through the approved loader seam.
 
     Deferred: scorecard depends on PIL (optional dependency).
+    Returns:
+        A tuple of (generate_scorecard, get_badge_config) functions or (None, None) if unavailable.
     """
     scorecard_module = load_optional_scorecard_module()
     if scorecard_module is None:
@@ -104,7 +110,7 @@ def _load_scorecard_helpers():
     return generate, badge_config
 
 
-def _missing_scorecard_result(args, config: dict[str, object]) -> tuple[Path | None, OutputResult]:
+def _missing_scorecard_result(args: argparse.Namespace, config: dict[str, object]) -> tuple[Path | None, OutputResult]:
     explicit_badge_request = bool(
         getattr(args, "badge_path", None)
         or config.get("badge_path")
@@ -146,7 +152,7 @@ def _readme_references_badge(rel_path: str) -> bool:
 
 
 def emit_scorecard_badge(
-    args, config: dict[str, object], state: dict[str, object]
+    args: argparse.Namespace, config: dict[str, object], state: dict[str, object]
 ) -> tuple[Path | None, OutputResult]:
     """Generate a scorecard image badge and print usage hints."""
     generate_scorecard, get_badge_config = _load_scorecard_helpers()
@@ -170,7 +176,7 @@ def emit_scorecard_badge(
 
     try:
         generate_scorecard(state, badge_path)
-    except (OSError, ImportError) as exc:
+    except (OSError, ImportError, RuntimeError) as exc:
         print(colorize(f"  ⚠ Could not generate scorecard badge: {exc}", "yellow"))
         return None, OutputResult(
             ok=False,

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from desloppify.engine.planning.scorecard_policy import (
     DEFAULT_ELEGANCE_COMPONENTS,
     ELEGANCE_COMPONENTS_BY_LANG,
@@ -52,7 +54,7 @@ def _lang_from_issues(state: dict) -> str | None:
     return None
 
 
-def resolve_scorecard_lang(state: dict) -> str | None:
+def resolve_scorecard_lang(state: dict[str, Any]) -> str | None:
     """Best-effort current scan language key for scorecard display policy."""
     return (
         _lang_from_scan_history(state)
@@ -70,10 +72,10 @@ def is_unassessed_subjective_placeholder(data: dict) -> bool:
 
 
 def collapse_elegance_dimensions(
-    active_dims: list[tuple[str, dict]],
+    active_dims: list[tuple[str, dict[str, Any]]],
     *,
     lang_key: str | None,
-) -> list[tuple[str, dict]]:
+) -> list[tuple[str, dict[str, Any]]]:
     """Collapse High/Mid/Low elegance rows into one aggregate display row."""
     component_names = set(
         ELEGANCE_COMPONENTS_BY_LANG.get(lang_key or "", DEFAULT_ELEGANCE_COMPONENTS)
@@ -139,11 +141,11 @@ def collapse_elegance_dimensions(
 
 
 def limit_scorecard_dimensions(
-    active_dims: list[tuple[str, dict]],
+    active_dims: list[tuple[str, dict[str, Any]]],
     *,
     lang_key: str | None,
     max_rows: int = SCORECARD_MAX_DIMENSIONS,
-) -> list[tuple[str, dict]]:
+) -> list[tuple[str, dict[str, Any]]]:
     """Limit scorecard rows with language-specific subjective priority."""
     if len(active_dims) <= max_rows:
         return active_dims
@@ -168,7 +170,7 @@ def limit_scorecard_dimensions(
     )
 
     remaining = {name: (name, data) for name, data in subjective}
-    selected: list[tuple[str, dict]] = []
+    selected: list[tuple[str, dict[str, Any]]] = []
     for name in preferred_order:
         row = remaining.pop(name, None)
         if row is None:
@@ -190,7 +192,7 @@ def limit_scorecard_dimensions(
     return [*mechanical, *selected]
 
 
-def prepare_scorecard_dimensions(state: dict) -> list[tuple[str, dict]]:
+def prepare_scorecard_dimensions(state: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
     """Prepare scorecard rows (active, elegance-collapsed, capped).
 
     Dimensions are derived dynamically from what the scoring engine produced
