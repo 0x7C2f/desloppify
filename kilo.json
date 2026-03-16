@@ -1,7 +1,8 @@
 {
+  "$schema": "https://kilo.ai/config.json",
   "plugin": [
-    "./plugins/skillnet.js",
-    "./plugins/mcporter.js"
+    "./desloppify/plugins/skillnet.js",
+    "./desloppify/plugins/mcporter.js"
   ],
   "skills": {
     "paths": [
