@@ -128,8 +128,8 @@ def default_dimension_keys_for_lang(lang_name: str | None) -> tuple[str, ...]:
     return _default_dimension_keys_for_lang(lang_name)
 
 
-load_subjective_dimension_metadata.cache_clear = _load_subjective_dimension_metadata.cache_clear
-load_subjective_dimension_metadata_for_lang.cache_clear = (
+load_subjective_dimension_metadata.cache_clear = _load_subjective_dimension_metadata.cache_clear  # type: ignore[reportFunctionMemberAccess]
+load_subjective_dimension_metadata_for_lang.cache_clear = (  # type: ignore[reportFunctionMemberAccess]
     _load_subjective_dimension_metadata_for_lang.cache_clear
 )
 

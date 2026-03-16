@@ -1,0 +1,34 @@
+{
+  "include": ["desloppify"],
+  "exclude": ["desloppify/tests", "desloppify/languages/*/tests", "**/__pycache__", "**/node_modules", "build", ".git", "desloppify/conftest.py"],
+  "venvPath": ".",
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "standard",
+  "reportMissingImports": false,
+  "reportMissingTypeStubs": false,
+  "reportUnknownMemberType": false,
+  "reportUnknownVariableType": false,
+  "reportUnknownArgumentType": false,
+  "reportUnknownLambdaType": false,
+  "reportMissingParameterType": false,
+  "reportOptionalCall": false,
+  "reportOptionalMemberAccess": false,
+  "reportOptionalSubscript": false,
+  "reportTypedDictNotRequiredAccess": false,
+  "reportArgumentType": false,
+  "reportReturnType": false,
+  "reportAttributeAccessIssue": false,
+  "reportPossiblyUnboundVariable": false,
+  "reportUnsupportedDunderAll": false,
+  "reportAssignmentType": false,
+  "reportIncompatibleMethodOverride": false,
+  "reportGeneralTypeIssues": false,
+  "reportCallIssue": false,
+  "reportOperatorIssue": false,
+  "pythonPlatform": "Linux",
+  "executionEnvironments": [
+    {
+      "root": "desloppify"
+    }
+  ]
+}

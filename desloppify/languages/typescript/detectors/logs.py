@@ -110,6 +110,7 @@ def _fix_logs(by_file: dict[str, list]):
     for filepath, file_entries in by_file.items():
         lines_to_remove = {e["line"] for e in file_entries}
         p = Path(filepath) if Path(filepath).is_absolute() else Path(resolve_path(filepath))
+        tmp: Path | None = None
         try:
             original = p.read_text()
             new_lines = []
@@ -124,12 +125,13 @@ def _fix_logs(by_file: dict[str, list]):
         except OSError as e:
             failed += 1
             print(colorize(f"  Failed to fix {filepath}: {e}", "red"), file=sys.stderr)
-            try:
-                tmp.unlink(missing_ok=True)
-            except OSError as cleanup_exc:
-                log_best_effort_failure(
-                    logger, f"clean temporary log fixer file {tmp}", cleanup_exc
-                )
+            if tmp is not None:
+                try:
+                    tmp.unlink(missing_ok=True)
+                except OSError as cleanup_exc:
+                    log_best_effort_failure(
+                        logger, f"clean temporary log fixer file {tmp}", cleanup_exc
+                    )
     msg = f"Removed {removed} lines across {len(by_file)} files."
     if failed:
         msg += f" ({failed} files failed.)"

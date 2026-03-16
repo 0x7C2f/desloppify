@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import importlib
 
-__all__ = [
+__all__ = [  # type: ignore[reportUnsupportedDunderAll]
     "fix_debug_logs",
     "fix_unused_imports",
     "fix_unused_vars",

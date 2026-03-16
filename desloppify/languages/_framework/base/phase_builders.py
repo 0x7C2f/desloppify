@@ -30,7 +30,7 @@ def _make_detector_phase_factory(
     """
     def factory() -> DetectorPhase:
         return DetectorPhase(label, run_fn, slow=slow)
-    factory.exclusive_detector = exclusive_detector
+    factory.exclusive_detector = exclusive_detector  # type: ignore[reportFunctionMemberAccess]
     return factory
 
 
@@ -66,9 +66,9 @@ SHARED_PHASE_FACTORIES = {
 }
 
 EXCLUSIVE_DETECTOR_MODULES: frozenset[str] = frozenset(
-    f.exclusive_detector
+    f.exclusive_detector  # type: ignore[reportFunctionMemberAccess]
     for f in SHARED_PHASE_FACTORIES.values()
-    if f.exclusive_detector is not None
+    if f.exclusive_detector is not None  # type: ignore[reportFunctionMemberAccess]
 )
 
 

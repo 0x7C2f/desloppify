@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, Any
+
 from desloppify.base.discovery.source import find_py_files
 from desloppify.languages._framework.base.phase_builders import (
     detector_phase_security,
