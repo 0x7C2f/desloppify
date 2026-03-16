@@ -6,10 +6,10 @@ import argparse
 import json
 from types import SimpleNamespace
 
-import desloppify.languages.typescript.detectors.smells.helpers as blocks_mod
-import desloppify.languages.typescript.detectors.smells.helpers as line_state_mod
 import desloppify.languages.typescript.detectors.patterns.cli as patterns_cli_mod
 import desloppify.languages.typescript.detectors.react.cli as react_cli_mod
+import desloppify.languages.typescript.detectors.smells.helpers as blocks_mod
+import desloppify.languages.typescript.detectors.smells.helpers as line_state_mod
 
 
 def test_block_helpers_find_body_and_line_info() -> None:

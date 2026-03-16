@@ -5,8 +5,9 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, cast
 
 from desloppify.app.commands.helpers.dynamic_loaders import (
     load_optional_scorecard_module,
@@ -48,7 +49,7 @@ def build_scan_query_payload(
         if isinstance(issues, dict)
         else None
     )
-    payload = {
+    payload: dict[str, Any] = {
         "command": "scan",
         "overall_score": scores.overall,
         "objective_score": scores.objective,
@@ -68,7 +69,7 @@ def build_scan_query_payload(
         "open_scope": open_scope,
         "warnings": warnings,
         "dimension_scores": state.get("dimension_scores"),
-        "score_breakdown": compute_health_breakdown(state.get("dimension_scores", {})),
+        "score_breakdown": compute_health_breakdown(cast(dict[str, dict[str, Any]], state.get("dimension_scores", {}))),
         "subjective_integrity": state.get("subjective_integrity"),
         "score_confidence": state.get("score_confidence"),
         "potentials": state.get("potentials"),
@@ -92,7 +93,7 @@ def build_scan_query_payload(
     except PLAN_LOAD_EXCEPTIONS as exc:
         log_best_effort_failure(logger, "load plan context for scan artifacts", exc)
 
-    return payload
+    return cast(ScanQueryPayload, payload)
 
 
 def _load_scorecard_helpers() -> tuple[Callable[..., Any] | None, Callable[..., tuple[Path | None, bool]] | None]:

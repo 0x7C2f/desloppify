@@ -12,6 +12,7 @@ from desloppify.base.discovery.paths import get_area
 from desloppify.base.discovery.source import find_ts_and_tsx_files
 from desloppify.base.output.fallbacks import log_best_effort_failure
 from desloppify.languages.typescript.detectors.contracts import DetectorResult
+
 from .catalog import PATTERN_FAMILIES
 
 logger = logging.getLogger(__name__)

@@ -20,8 +20,8 @@ from .runner.orchestrator_common import parse_only_stages
 from .runner.stage_prompts import cmd_stage_prompt
 from .services import TriageServices
 from .stage_queue import has_triage_in_queue, inject_triage_stages
-from .stages.completion import cmd_confirm_existing, cmd_triage_complete
 from .stages.commands import run_stage_command
+from .stages.completion import cmd_confirm_existing, cmd_triage_complete
 
 
 def _cmd_triage_start(

@@ -14,8 +14,8 @@ from desloppify.languages import (
     register_lang,
 )
 from desloppify.languages._framework.base.types import DetectorPhase, LangConfig
-from desloppify.languages._framework.registry.discovery import load_all
 from desloppify.languages._framework.registry import state as registry_state
+from desloppify.languages._framework.registry.discovery import load_all
 
 # ── register_lang ────────────────────────────────────────────
 

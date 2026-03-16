@@ -6,8 +6,8 @@ import os
 from functools import partial
 from pathlib import Path
 
-from desloppify.base.discovery.source import find_py_files
 from desloppify.base.discovery.paths import get_area
+from desloppify.base.discovery.source import find_py_files
 from desloppify.engine.detectors.base import FunctionInfo
 from desloppify.languages.python.extractors import extract_py_functions
 

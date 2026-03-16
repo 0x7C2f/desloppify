@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import json
 import logging
+from collections.abc import Iterator
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
-from collections.abc import Iterator
 
 from desloppify.base.output.fallbacks import log_best_effort_failure
 

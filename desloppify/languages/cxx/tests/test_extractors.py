@@ -3,7 +3,10 @@ from __future__ import annotations
 from pathlib import Path
 
 import desloppify.languages.cxx.extractors as cxx_extractors
-from desloppify.languages.cxx.extractors import extract_all_cxx_functions, find_cxx_files
+from desloppify.languages.cxx.extractors import (
+    extract_all_cxx_functions,
+    find_cxx_files,
+)
 
 
 def test_extract_cxx_functions_and_classes(tmp_path):

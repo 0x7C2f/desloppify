@@ -10,7 +10,8 @@ __all__ = [
     "merge_scan",
 ]
 
-from desloppify.base.registry import DETECTORS
+from desloppify.base.registry import DETECTORS, get_detector_meta
+from desloppify.engine._state import _recompute_stats
 from desloppify.engine._state.issue_semantics import ensure_work_item_semantics
 from desloppify.engine._state.merge_history import (
     _append_scan_history,
@@ -20,9 +21,9 @@ from desloppify.engine._state.merge_history import (
     _record_scan_metadata,
 )
 from desloppify.engine._state.merge_issues import (
-    verify_disappeared,
     find_suspect_detectors,
     upsert_issues,
+    verify_disappeared,
 )
 from desloppify.engine._state.schema import (
     ScanDiff,
@@ -31,11 +32,6 @@ from desloppify.engine._state.schema import (
     utc_now,
     validate_state_invariants,
 )
-
-
-from desloppify.engine._state import _recompute_stats
-
-from desloppify.base.registry import get_detector_meta
 
 
 def _latest_trusted_assessment_import_timestamp(state: StateModel) -> str:

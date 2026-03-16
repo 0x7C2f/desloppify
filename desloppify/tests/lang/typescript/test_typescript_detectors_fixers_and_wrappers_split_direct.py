@@ -7,12 +7,12 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
+import desloppify.languages.typescript as ts_lang_mod
 import desloppify.languages.typescript._fixers as ts_fixers_mod
 import desloppify.languages.typescript.commands as ts_detector_cli_api_mod
 import desloppify.languages.typescript.detectors.security.detector as ts_security_mod
 import desloppify.languages.typescript.detectors.smells.assets as ts_assets_mod
 import desloppify.languages.typescript.detectors.unused_fallback as ts_unused_mod
-import desloppify.languages.typescript as ts_lang_mod
 from desloppify.languages.typescript.detectors.contracts import DetectorResult
 
 

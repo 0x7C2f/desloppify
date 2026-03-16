@@ -7,8 +7,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from desloppify.base.discovery.file_paths import rel
-from desloppify.base.output.terminal import colorize
 from desloppify.base.discovery.paths import get_project_root
+from desloppify.base.output.terminal import colorize
 from desloppify.engine.planning.helpers import is_subjective_phase
 from desloppify.engine.policy.zones import ZONE_POLICIES, FileZoneMap
 from desloppify.languages.framework import (

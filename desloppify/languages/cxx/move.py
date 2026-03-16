@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from desloppify.languages._framework.scaffold_move import (
     find_replacements as scaffold_find_replacements,
+)
+from desloppify.languages._framework.scaffold_move import (
     find_self_replacements as scaffold_find_self_replacements,
 )
 

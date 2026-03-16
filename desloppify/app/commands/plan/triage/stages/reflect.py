@@ -8,8 +8,12 @@ from desloppify.base.output.terminal import colorize
 from desloppify.state_io import utc_now
 
 from ..display.dashboard import print_reflect_result
-from ..stage_queue import cascade_clear_dispositions, cascade_clear_later_confirmations, has_triage_in_queue
 from ..services import TriageServices, default_triage_services
+from ..stage_queue import (
+    cascade_clear_dispositions,
+    cascade_clear_later_confirmations,
+    has_triage_in_queue,
+)
 from ..validation.reflect_accounting import (
     ReflectDisposition,
     parse_reflect_dispositions,

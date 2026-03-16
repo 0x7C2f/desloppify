@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from desloppify.engine._plan.refresh_lifecycle import (
-    coarse_lifecycle_phase,
-    clear_postflight_scan_completion,
-    current_lifecycle_phase,
     LIFECYCLE_PHASE_EXECUTE,
     LIFECYCLE_PHASE_REVIEW,
     LIFECYCLE_PHASE_REVIEW_POSTFLIGHT,
     LIFECYCLE_PHASE_SCAN,
+    clear_postflight_scan_completion,
+    coarse_lifecycle_phase,
+    current_lifecycle_phase,
     mark_postflight_scan_completed,
     postflight_scan_pending,
 )

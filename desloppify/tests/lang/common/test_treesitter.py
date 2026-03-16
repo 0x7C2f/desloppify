@@ -456,11 +456,11 @@ class TestCxxIncludeResolver:
 
 class TestDepGraphBuilder:
     def test_go_dep_graph(self, tmp_path):
-        from desloppify.languages._framework.treesitter.imports.resolver_cache import (
-            reset_import_cache,
-        )
         from desloppify.languages._framework.treesitter.imports.graph import (
             ts_build_dep_graph,
+        )
+        from desloppify.languages._framework.treesitter.imports.resolver_cache import (
+            reset_import_cache,
         )
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
@@ -505,7 +505,9 @@ class TestNormalize:
             _run_query,
             _unwrap_node,
         )
-        from desloppify.languages._framework.treesitter.imports.normalize import normalize_body
+        from desloppify.languages._framework.treesitter.imports.normalize import (
+            normalize_body,
+        )
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
         source = b"""package main
@@ -557,8 +559,12 @@ class TestGracefulDegradation:
         saved = ts_mod._AVAILABLE
         ts_mod._AVAILABLE = False
         try:
-            from desloppify.languages._framework.generic_support.core import generic_lang
-            from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
+            from desloppify.languages._framework.generic_support.core import (
+                generic_lang,
+            )
+            from desloppify.languages._framework.treesitter.specs.compiled import (
+                GO_SPEC,
+            )
 
             cfg = generic_lang(
                 name="_test_no_ts",
@@ -677,11 +683,15 @@ class TestSpecValidation:
         self._test_spec(JAVA_SPEC)
 
     def test_kotlin_spec(self):
-        from desloppify.languages._framework.treesitter.specs.compiled import KOTLIN_SPEC
+        from desloppify.languages._framework.treesitter.specs.compiled import (
+            KOTLIN_SPEC,
+        )
         self._test_spec(KOTLIN_SPEC)
 
     def test_csharp_spec(self):
-        from desloppify.languages._framework.treesitter.specs.compiled import CSHARP_SPEC
+        from desloppify.languages._framework.treesitter.specs.compiled import (
+            CSHARP_SPEC,
+        )
         self._test_spec(CSHARP_SPEC)
 
     def test_swift_spec(self):
@@ -705,11 +715,15 @@ class TestSpecValidation:
         self._test_spec(SCALA_SPEC)
 
     def test_elixir_spec(self):
-        from desloppify.languages._framework.treesitter.specs.functional import ELIXIR_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            ELIXIR_SPEC,
+        )
         self._test_spec(ELIXIR_SPEC)
 
     def test_haskell_spec(self):
-        from desloppify.languages._framework.treesitter.specs.functional import HASKELL_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            HASKELL_SPEC,
+        )
         self._test_spec(HASKELL_SPEC)
 
     def test_bash_spec(self):
@@ -725,7 +739,9 @@ class TestSpecValidation:
         self._test_spec(PERL_SPEC)
 
     def test_clojure_spec(self):
-        from desloppify.languages._framework.treesitter.specs.functional import CLOJURE_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            CLOJURE_SPEC,
+        )
         self._test_spec(CLOJURE_SPEC)
 
     def test_zig_spec(self):
@@ -737,11 +753,15 @@ class TestSpecValidation:
         self._test_spec(NIM_SPEC)
 
     def test_powershell_spec(self):
-        from desloppify.languages._framework.treesitter.specs.scripting import POWERSHELL_SPEC
+        from desloppify.languages._framework.treesitter.specs.scripting import (
+            POWERSHELL_SPEC,
+        )
         self._test_spec(POWERSHELL_SPEC)
 
     def test_gdscript_spec(self):
-        from desloppify.languages._framework.treesitter.specs.scripting import GDSCRIPT_SPEC
+        from desloppify.languages._framework.treesitter.specs.scripting import (
+            GDSCRIPT_SPEC,
+        )
         self._test_spec(GDSCRIPT_SPEC)
 
     def test_dart_spec(self):
@@ -753,15 +773,21 @@ class TestSpecValidation:
         self._test_spec(JS_SPEC)
 
     def test_erlang_spec(self):
-        from desloppify.languages._framework.treesitter.specs.functional import ERLANG_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            ERLANG_SPEC,
+        )
         self._test_spec(ERLANG_SPEC)
 
     def test_ocaml_spec(self):
-        from desloppify.languages._framework.treesitter.specs.functional import OCAML_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            OCAML_SPEC,
+        )
         self._test_spec(OCAML_SPEC)
 
     def test_fsharp_spec(self):
-        from desloppify.languages._framework.treesitter.specs.functional import FSHARP_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            FSHARP_SPEC,
+        )
         self._test_spec(FSHARP_SPEC)
 
 
@@ -771,12 +797,14 @@ class TestSpecValidation:
 class TestParseTreeCache:
     def test_cache_hit(self, go_file, tmp_path):
         from desloppify.base.runtime_state import make_runtime_context, runtime_scope
+        from desloppify.languages._framework.treesitter.analysis.extractors import (
+            _get_parser,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             current_parse_tree_cache,
             disable_parse_cache,
             enable_parse_cache,
         )
-        from desloppify.languages._framework.treesitter.analysis.extractors import _get_parser
 
         parser, _language = _get_parser("go")
         with runtime_scope(make_runtime_context()):
@@ -794,11 +822,13 @@ class TestParseTreeCache:
 
     def test_cache_disabled(self, go_file, tmp_path):
         from desloppify.base.runtime_state import make_runtime_context, runtime_scope
+        from desloppify.languages._framework.treesitter.analysis.extractors import (
+            _get_parser,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             current_parse_tree_cache,
             disable_parse_cache,
         )
-        from desloppify.languages._framework.treesitter.analysis.extractors import _get_parser
 
         with runtime_scope(make_runtime_context()):
             disable_parse_cache()
@@ -1199,10 +1229,10 @@ class TestEslintParser:
 
         import pytest
 
-        from desloppify.languages._framework.generic_support.core import parse_eslint
         from desloppify.languages._framework.generic_parts.parsers import (
             ToolParserError,
         )
+        from desloppify.languages._framework.generic_support.core import parse_eslint
 
         with pytest.raises(ToolParserError):
             parse_eslint("not json", Path("/src"))

@@ -5,14 +5,14 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
-from desloppify.languages import framework as lang_api
 from desloppify import state as state_mod
+from desloppify.base.discovery.file_paths import count_lines
 from desloppify.base.discovery.source import (
     DEFAULT_EXCLUSIONS,
     read_file_text,
 )
-from desloppify.base.discovery.file_paths import count_lines
 from desloppify.base.output.terminal import colorize
+from desloppify.languages import framework as lang_api
 
 logger = logging.getLogger(__name__)
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from desloppify.engine._state.filtering import make_issue
 from desloppify.engine.detectors import complexity as complexity_detector_mod
 from desloppify.engine.detectors import flat_dirs as flat_dirs_detector_mod
 from desloppify.engine.detectors import gods as gods_detector_mod
@@ -12,7 +13,6 @@ from desloppify.engine.detectors import large as large_detector_mod
 from desloppify.engine.detectors import orphaned as orphaned_detector_mod
 from desloppify.engine.detectors import single_use as single_use_detector_mod
 from desloppify.engine.detectors.base import ComplexitySignal, GodRule
-from desloppify.engine._state.filtering import make_issue
 from desloppify.engine.policy.zones import adjust_potential, filter_entries
 from desloppify.languages._framework.base.structural import (
     add_structural_signal,

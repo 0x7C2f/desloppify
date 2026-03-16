@@ -17,9 +17,9 @@ from desloppify.languages._framework.base.lang_config_runtime import (
 from desloppify.languages._framework.base.types_shared import (
     BoundaryRule,
     CoverageStatus,
-    DetectorEntry,
     DetectorCoverageRecord,
     DetectorCoverageStatus,
+    DetectorEntry,
     FixerConfig,
     FixResult,
     LangSecurityResult,

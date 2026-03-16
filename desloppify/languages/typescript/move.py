@@ -6,8 +6,8 @@ import logging
 import os
 from pathlib import Path
 
-from desloppify.base.output.fallbacks import log_best_effort_failure
 from desloppify.base.discovery.paths import get_src_path
+from desloppify.base.output.fallbacks import log_best_effort_failure
 
 VERIFY_HINT = "npx tsc --noEmit"
 logger = logging.getLogger(__name__)

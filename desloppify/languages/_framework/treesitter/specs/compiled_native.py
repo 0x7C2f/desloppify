@@ -5,7 +5,6 @@ from __future__ import annotations
 from ..imports.resolvers_backend import resolve_cxx_include, resolve_scala_import
 from ..types import TreeSitterLangSpec
 
-
 C_SPEC = TreeSitterLangSpec(
     grammar="c",
     function_query="""

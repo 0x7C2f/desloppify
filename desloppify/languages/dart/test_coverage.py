@@ -7,7 +7,6 @@ import re
 from pathlib import Path
 
 from desloppify.base.discovery.paths import get_project_root
-
 from desloppify.base.text_utils import strip_c_style_comments
 from desloppify.languages.dart.pubspec import read_package_name
 

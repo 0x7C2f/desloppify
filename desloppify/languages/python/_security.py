@@ -5,9 +5,12 @@ from __future__ import annotations
 import shutil
 
 from desloppify.base.discovery.source import collect_exclude_dirs
-from desloppify.languages._framework.base.types import DetectorCoverageStatus, LangSecurityResult
-from desloppify.languages.python.detectors.bandit_adapter import detect_with_bandit
+from desloppify.languages._framework.base.types import (
+    DetectorCoverageStatus,
+    LangSecurityResult,
+)
 from desloppify.languages.python._helpers import scan_root_from_files
+from desloppify.languages.python.detectors.bandit_adapter import detect_with_bandit
 
 
 def missing_bandit_coverage() -> DetectorCoverageStatus:

@@ -7,6 +7,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+from desloppify.engine._state.filtering import make_issue
 from desloppify.languages._framework.base.types import (
     DetectorPhase,
     FixerConfig,
@@ -20,7 +21,6 @@ from desloppify.languages._framework.generic_parts.tool_runner import (
     run_tool_result,
 )
 from desloppify.languages._framework.generic_parts.tool_spec import ToolSpec
-from desloppify.engine._state.filtering import make_issue
 
 
 def _record_tool_failure_coverage(

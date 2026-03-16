@@ -5,7 +5,10 @@ from __future__ import annotations
 from pathlib import Path
 
 from desloppify.engine.detectors.base import FunctionInfo
-from desloppify.languages.csharp.extractors import extract_csharp_functions, find_csharp_files
+from desloppify.languages.csharp.extractors import (
+    extract_csharp_functions,
+    find_csharp_files,
+)
 
 
 def extract_all_csharp_functions(path: Path) -> list[FunctionInfo]:

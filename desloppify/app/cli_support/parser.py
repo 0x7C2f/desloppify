@@ -7,12 +7,12 @@ from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as get_version
 
 from desloppify.app.cli_support.parser_groups import (
+    _add_autofix_parser,
     _add_backlog_parser,
     _add_config_parser,
     _add_detect_parser,
     _add_dev_parser,
     _add_exclude_parser,
-    _add_autofix_parser,
     _add_langs_parser,
     _add_move_parser,
     _add_next_parser,

@@ -32,10 +32,12 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-from desloppify.base.discovery.source import collect_exclude_dirs as _collect_exclude_dirs
-from desloppify.base.discovery.source import get_exclusions as _get_exclusions
 from desloppify.base.discovery.file_paths import matches_exclusion as _matches_exclusion
 from desloppify.base.discovery.paths import get_project_root
+from desloppify.base.discovery.source import (
+    collect_exclude_dirs as _collect_exclude_dirs,
+)
+from desloppify.base.discovery.source import get_exclusions as _get_exclusions
 
 logger = logging.getLogger(__name__)
 

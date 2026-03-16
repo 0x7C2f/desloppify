@@ -6,11 +6,11 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import desloppify.engine._state.filtering as filtering_mod
-from desloppify.engine._work_queue.core import QueueBuildOptions
 import desloppify.engine.planning.helpers as plan_common_mod
 import desloppify.engine.planning.queue_policy as queue_policy_mod
 import desloppify.engine.planning.scan as plan_scan_mod
 import desloppify.engine.planning.select as plan_select_mod
+from desloppify.engine._work_queue.core import QueueBuildOptions
 
 
 class _Phase:

@@ -8,7 +8,6 @@ import os
 from pathlib import Path
 
 from desloppify.base.discovery.file_paths import rel
-
 from desloppify.base.discovery.source import read_file_text
 from desloppify.engine.policy.zones import EXCLUDED_ZONES, Zone
 

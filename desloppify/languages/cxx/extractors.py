@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import hashlib
-from os import PathLike
 import re
+from os import PathLike
 from pathlib import Path
 
 from desloppify.base.discovery.file_paths import resolve_path

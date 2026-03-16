@@ -2,18 +2,13 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
-
 from desloppify.base.discovery.source import find_py_files
-from desloppify.engine.policy.zones import COMMON_ZONE_RULES, Zone, ZoneRule
 from desloppify.languages._framework.base.phase_builders import (
     detector_phase_security,
     detector_phase_signature,
     detector_phase_test_coverage,
     shared_subjective_duplicates_tail,
 )
-from desloppify.languages._framework.registry.registration import register_full_plugin
-from desloppify.languages._framework.registry.state import register_lang_hooks
 from desloppify.languages._framework.base.shared_phases import phase_private_imports
 from desloppify.languages._framework.base.types import (
     DetectorCoverageStatus,
@@ -21,17 +16,10 @@ from desloppify.languages._framework.base.types import (
     LangConfig,
     LangSecurityResult,
 )
+from desloppify.languages._framework.registry.registration import register_full_plugin
+from desloppify.languages._framework.registry.state import register_lang_hooks
 from desloppify.languages.python import test_coverage as py_test_coverage_hooks
 from desloppify.languages.python._helpers import _get_py_area, py_extract_functions
-from desloppify.languages.python.review import (
-    HOLISTIC_REVIEW_DIMENSIONS as PY_HOLISTIC_REVIEW_DIMENSIONS,
-    LOW_VALUE_PATTERN as PY_LOW_VALUE_PATTERN,
-    MIGRATION_MIXED_EXTENSIONS as PY_MIGRATION_MIXED_EXTENSIONS,
-    MIGRATION_PATTERN_PAIRS as PY_MIGRATION_PATTERN_PAIRS,
-    REVIEW_GUIDANCE as PY_REVIEW_GUIDANCE,
-    api_surface as py_review_api_surface,
-    module_patterns as py_review_module_patterns,
-)
 from desloppify.languages.python._security import (
     detect_python_security,
     missing_bandit_coverage,
@@ -58,6 +46,27 @@ from desloppify.languages.python.phases import (
     phase_uncalled_functions,
     phase_unused,
     phase_unused_enums,
+)
+from desloppify.languages.python.review import (
+    HOLISTIC_REVIEW_DIMENSIONS as PY_HOLISTIC_REVIEW_DIMENSIONS,
+)
+from desloppify.languages.python.review import (
+    LOW_VALUE_PATTERN as PY_LOW_VALUE_PATTERN,
+)
+from desloppify.languages.python.review import (
+    MIGRATION_MIXED_EXTENSIONS as PY_MIGRATION_MIXED_EXTENSIONS,
+)
+from desloppify.languages.python.review import (
+    MIGRATION_PATTERN_PAIRS as PY_MIGRATION_PATTERN_PAIRS,
+)
+from desloppify.languages.python.review import (
+    REVIEW_GUIDANCE as PY_REVIEW_GUIDANCE,
+)
+from desloppify.languages.python.review import (
+    api_surface as py_review_api_surface,
+)
+from desloppify.languages.python.review import (
+    module_patterns as py_review_module_patterns,
 )
 
 if TYPE_CHECKING:

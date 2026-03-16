@@ -6,6 +6,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+from desloppify.engine._state.filtering import make_issue
 from desloppify.engine.detectors.base import ComplexitySignal
 from desloppify.engine.detectors.complexity import detect_complexity
 from desloppify.engine.detectors.flat_dirs import (
@@ -20,7 +21,6 @@ from desloppify.engine.detectors.orphaned import (
     detect_orphaned_files,
 )
 from desloppify.engine.detectors.single_use import detect_single_use_abstractions
-from desloppify.engine._state.filtering import make_issue
 from desloppify.engine.policy.zones import adjust_potential, filter_entries
 from desloppify.languages._framework.base.structural import (
     add_structural_signal,

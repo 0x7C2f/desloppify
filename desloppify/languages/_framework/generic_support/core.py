@@ -11,12 +11,6 @@ from typing import Any
 
 from desloppify.engine.policy.zones import ZoneRule
 from desloppify.languages._framework.base.types import LangConfig
-from .capabilities import (
-    SHARED_PHASE_LABELS,
-    capability_report,
-    generic_zone_rules,
-    make_file_finder,
-)
 from desloppify.languages._framework.generic_parts.parsers import (
     PARSERS as _PARSERS,
 )
@@ -34,6 +28,13 @@ from desloppify.languages._framework.generic_parts.tool_factories import (
 )
 from desloppify.languages._framework.generic_parts.tool_spec import (
     normalize_tool_specs,
+)
+
+from .capabilities import (
+    SHARED_PHASE_LABELS,
+    capability_report,
+    generic_zone_rules,
+    make_file_finder,
 )
 from .registration import (
     GenericLangOptions,

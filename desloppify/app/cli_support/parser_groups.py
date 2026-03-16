@@ -5,10 +5,10 @@ from __future__ import annotations
 import argparse
 
 from desloppify.app.cli_support.parser_groups_admin import (  # noqa: F401 (re-exports)
+    _add_autofix_parser,
     _add_config_parser,
     _add_detect_parser,
     _add_dev_parser,
-    _add_autofix_parser,
     _add_langs_parser,
     _add_move_parser,
     _add_review_parser,

@@ -6,27 +6,27 @@ import logging
 from typing import Any
 
 from desloppify import state as state_mod
+from desloppify.base.config import target_strict_score_from_config
 from desloppify.base.exception_sets import PLAN_LOAD_EXCEPTIONS
 from desloppify.base.output.fallbacks import log_best_effort_failure
 from desloppify.base.output.terminal import colorize
-from desloppify.base.config import target_strict_score_from_config
 from desloppify.engine._plan.constants import (
     WORKFLOW_COMMUNICATE_SCORE_ID,
     is_synthetic_id,
 )
 from desloppify.engine._plan.operations.meta import append_log_entry
 from desloppify.engine._plan.persistence import load_plan, save_plan
-from desloppify.engine._plan.scan_issue_reconcile import reconcile_plan_after_scan
 from desloppify.engine._plan.refresh_lifecycle import (
     mark_postflight_scan_completed,
 )
+from desloppify.engine._plan.scan_issue_reconcile import reconcile_plan_after_scan
 from desloppify.engine._plan.sync import (
     ReconcileResult,
     live_planned_queue_empty,
     reconcile_plan,
 )
-from desloppify.engine._plan.sync.dimensions import current_unscored_ids
 from desloppify.engine._plan.sync.context import is_mid_cycle
+from desloppify.engine._plan.sync.dimensions import current_unscored_ids
 from desloppify.engine._plan.sync.workflow import clear_score_communicated_sentinel
 from desloppify.engine.work_queue import build_deferred_disposition_item
 
@@ -109,7 +109,9 @@ def _has_objective_cycle(
 ) -> bool | None:
     """Return True when objective queue work exists and a cycle baseline should freeze."""
     try:
-        from desloppify.app.commands.helpers.queue_progress import plan_aware_queue_breakdown
+        from desloppify.app.commands.helpers.queue_progress import (
+            plan_aware_queue_breakdown,
+        )
 
         breakdown = plan_aware_queue_breakdown(state, plan)
     except PLAN_LOAD_EXCEPTIONS as exc:

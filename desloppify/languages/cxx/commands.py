@@ -24,7 +24,12 @@ from desloppify.languages._framework.commands.registry import (
 from desloppify.languages._framework.generic_parts.parsers import PARSERS
 from desloppify.languages._framework.generic_parts.tool_runner import run_tool_result
 from desloppify.languages.cxx._helpers import build_cxx_dep_graph
-from desloppify.languages.cxx.extractors import CXX_EXTENSIONS, CXX_SOURCE_EXTENSIONS, extract_all_cxx_functions, find_cxx_files
+from desloppify.languages.cxx.extractors import (
+    CXX_EXTENSIONS,
+    CXX_SOURCE_EXTENSIONS,
+    extract_all_cxx_functions,
+    find_cxx_files,
+)
 from desloppify.languages.cxx.phases import CXX_COMPLEXITY_SIGNALS
 
 cmd_large = make_cmd_large(

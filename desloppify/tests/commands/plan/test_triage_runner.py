@@ -6,15 +6,15 @@ from pathlib import Path
 
 import pytest
 
-from desloppify.app.commands.plan.triage.validation.core import (
-    _validate_reflect_issue_accounting,
-)
 from desloppify.app.commands.plan.triage.runner import codex_runner
 from desloppify.app.commands.plan.triage.runner.stage_prompts import build_stage_prompt
 from desloppify.app.commands.plan.triage.runner.stage_validation import (
     build_auto_attestation,
     validate_completion,
     validate_stage,
+)
+from desloppify.app.commands.plan.triage.validation.core import (
+    _validate_reflect_issue_accounting,
 )
 from desloppify.engine._plan.triage.prompt import TriageInput
 

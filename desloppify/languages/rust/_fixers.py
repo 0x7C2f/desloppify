@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from desloppify.base.discovery.file_paths import rel, resolve_path, safe_write_text
-from desloppify.languages._framework.base.types import FixResult, FixerConfig
+from desloppify.languages._framework.base.types import FixerConfig, FixResult
 from desloppify.languages.rust.detectors.api import (
     detect_import_hygiene,
     replace_same_crate_imports,

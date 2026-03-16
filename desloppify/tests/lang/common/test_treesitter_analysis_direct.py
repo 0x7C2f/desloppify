@@ -18,7 +18,7 @@ class FakeNode:
         type_: str,
         *,
         text: str = "",
-        children: list["FakeNode"] | None = None,
+        children: list[FakeNode] | None = None,
         start_point: tuple[int, int] = (0, 0),
         end_point: tuple[int, int] = (0, 0),
         start_byte: int = 0,

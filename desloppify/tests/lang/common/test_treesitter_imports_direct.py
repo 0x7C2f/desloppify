@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import json
 import builtins
+import json
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -21,7 +21,7 @@ class FakeNode:
         type_: str,
         *,
         text: str = "",
-        children: list["FakeNode"] | None = None,
+        children: list[FakeNode] | None = None,
         start_byte: int = 0,
         end_byte: int = 0,
     ) -> None:

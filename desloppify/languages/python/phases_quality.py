@@ -7,8 +7,8 @@ from pathlib import Path
 from desloppify.base.output.terminal import log
 from desloppify.engine._state.filtering import make_issue
 from desloppify.engine.policy.zones import adjust_potential, filter_entries
-from desloppify.languages._framework.issue_factories import make_smell_issues
 from desloppify.languages._framework.base.types import LangRuntimeContract
+from desloppify.languages._framework.issue_factories import make_smell_issues
 from desloppify.languages.python.detectors import dict_keys as dict_keys_detector_mod
 from desloppify.languages.python.detectors import (
     import_linter_adapter as import_linter_adapter_mod,

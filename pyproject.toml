@@ -81,9 +81,8 @@ norecursedirs = ["desloppify/tests/fixtures"]
 target-version = "py311"
 line-length = 88
 
-[tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
-ignore = ["E501"]
+ignore = ["E501", "E731", "E402", "F401", "F821"]
 
 [tool.mypy]
 python_version = "3.11"

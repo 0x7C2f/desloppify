@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
+from desloppify.engine._work_queue.core import QueueBuildOptions
+from desloppify.engine._work_queue.core import build_work_queue as _build_work_queue
 from desloppify.engine.planning.queue_policy import (
     build_backlog_queue,
     build_execution_queue,
 )
-from desloppify.engine._work_queue.core import QueueBuildOptions
-from desloppify.engine._work_queue.core import build_work_queue as _build_work_queue
 
 
 def build_work_queue(state, **kwargs):

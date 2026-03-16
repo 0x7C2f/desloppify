@@ -1,12 +1,13 @@
 """State-path and scan-gating helpers for command modules."""
 
 from __future__ import annotations
+
 import argparse
 from pathlib import Path
 
 from desloppify.app.commands.helpers.lang import auto_detect_lang_name
-from desloppify.base.output.terminal import colorize
 from desloppify.base.discovery.paths import get_project_root
+from desloppify.base.output.terminal import colorize
 from desloppify.engine._state.schema import (
     scan_inventory_available,
     scan_metrics_available,

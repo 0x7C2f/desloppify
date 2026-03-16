@@ -12,14 +12,15 @@ from desloppify.engine._scoring.policy.core import (
 )
 from desloppify.engine.policy.zones import ZoneRule
 from desloppify.languages._framework.base.types import DetectorPhase, FixerConfig
+from desloppify.languages._framework.generic_parts.tool_factories import (
+    make_generic_fixer,
+    make_tool_phase,
+)
+
 from .capabilities import (
     empty_dep_graph,
     make_file_finder,
     noop_extract_functions,
-)
-from desloppify.languages._framework.generic_parts.tool_factories import (
-    make_generic_fixer,
-    make_tool_phase,
 )
 from .structural import (
     _make_coupling_phase,
@@ -87,8 +88,12 @@ def _resolve_generic_extractors(
     if not is_available():
         return file_finder, extract_fn, dep_graph_fn, has_treesitter, ts_spec
 
-    from desloppify.languages._framework.treesitter.analysis.extractors import make_ts_extractor
-    from desloppify.languages._framework.treesitter.imports.graph import make_ts_dep_builder
+    from desloppify.languages._framework.treesitter.analysis.extractors import (
+        make_ts_extractor,
+    )
+    from desloppify.languages._framework.treesitter.imports.graph import (
+        make_ts_dep_builder,
+    )
 
     has_treesitter = True
     extract_fn = make_ts_extractor(ts_spec, file_finder)
@@ -130,7 +135,9 @@ def _build_generic_phases(
             phases.append(make_unused_imports_phase(ts_spec))
 
     if extract_fn is not noop_extract_functions:
-        from desloppify.languages._framework.base.phase_builders import detector_phase_signature
+        from desloppify.languages._framework.base.phase_builders import (
+            detector_phase_signature,
+        )
 
         phases.append(detector_phase_signature())
 

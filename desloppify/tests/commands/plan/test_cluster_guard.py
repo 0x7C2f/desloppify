@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from desloppify.app.commands.plan.override.resolve_helpers import (
     _CLUSTER_INDIVIDUAL_THRESHOLD,
+)
+from desloppify.app.commands.plan.override.resolve_helpers import (
     check_cluster_guard as _check_cluster_guard,
 )
 from desloppify.engine._plan.schema import empty_plan, ensure_plan_defaults

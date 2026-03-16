@@ -8,7 +8,20 @@ from __future__ import annotations
 
 from typing import Any
 
-from desloppify.engine.plan_triage import TRIAGE_STAGE_SPECS
+from desloppify.engine._plan.constants import (
+    confirmed_triage_stage_names,
+    recorded_unconfirmed_triage_stage_names,
+)
+from desloppify.engine._plan.refresh_lifecycle import (
+    LIFECYCLE_PHASE_REVIEW_INITIAL,
+    LIFECYCLE_PHASE_TRIAGE,
+    LIFECYCLE_PHASE_TRIAGE_POSTFLIGHT,
+    LIFECYCLE_PHASE_WORKFLOW,
+    LIFECYCLE_PHASE_WORKFLOW_POSTFLIGHT,
+    current_lifecycle_phase,
+    subjective_review_completed_for_scan,
+)
+from desloppify.engine._plan.triage.snapshot import build_triage_snapshot
 from desloppify.engine._scoring.subjective.core import DISPLAY_NAMES
 from desloppify.engine._state.issue_semantics import is_triage_finding
 from desloppify.engine._state.schema import StateModel
@@ -25,24 +38,11 @@ from desloppify.engine._work_queue.synthetic_workflow import (
     build_score_checkpoint_item,
 )
 from desloppify.engine._work_queue.types import WorkQueueItem
-from desloppify.engine._plan.constants import (
-    confirmed_triage_stage_names,
-    recorded_unconfirmed_triage_stage_names,
-)
-from desloppify.engine._plan.triage.snapshot import build_triage_snapshot
-from desloppify.engine._plan.refresh_lifecycle import (
-    LIFECYCLE_PHASE_REVIEW_INITIAL,
-    LIFECYCLE_PHASE_TRIAGE,
-    LIFECYCLE_PHASE_TRIAGE_POSTFLIGHT,
-    LIFECYCLE_PHASE_WORKFLOW,
-    LIFECYCLE_PHASE_WORKFLOW_POSTFLIGHT,
-    current_lifecycle_phase,
-    subjective_review_completed_for_scan,
-)
 from desloppify.engine.plan_triage import (
     TRIAGE_IDS,
     TRIAGE_STAGE_DEPENDENCIES,
     TRIAGE_STAGE_LABELS,
+    TRIAGE_STAGE_SPECS,
     triage_manual_stage_command,
     triage_run_stages_command,
     triage_runner_commands,

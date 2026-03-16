@@ -6,8 +6,8 @@ from dataclasses import dataclass
 
 from desloppify.app.commands.helpers.query import write_query
 from desloppify.base.output.terminal import colorize, print_table
-from desloppify.engine._state.filtering import open_scope_breakdown
 from desloppify.engine._scoring.results.core import compute_health_breakdown
+from desloppify.engine._state.filtering import open_scope_breakdown
 
 
 def _status_plan_payload(plan: dict | None) -> dict:

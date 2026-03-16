@@ -23,8 +23,10 @@ from desloppify.languages._framework.commands.registry import (
     make_cmd_dupes,
     make_cmd_orphaned,
 )
-from desloppify.languages._framework.generic_parts.tool_runner import ToolRunResult
-from desloppify.languages._framework.generic_parts.tool_runner import run_tool_result
+from desloppify.languages._framework.generic_parts.tool_runner import (
+    ToolRunResult,
+    run_tool_result,
+)
 from desloppify.languages.rust.detectors import (
     detect_async_locking,
     detect_doctest_hygiene,
@@ -48,7 +50,11 @@ from desloppify.languages.rust.phases import (
 )
 from desloppify.languages.rust.tools import (
     CARGO_ERROR_CMD as RUST_CHECK_CMD,
+)
+from desloppify.languages.rust.tools import (
     CLIPPY_WARNING_CMD as RUST_CLIPPY_CMD,
+)
+from desloppify.languages.rust.tools import (
     parse_cargo_errors,
     parse_clippy_messages,
     run_rustdoc_result,

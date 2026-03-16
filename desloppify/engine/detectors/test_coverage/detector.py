@@ -24,7 +24,6 @@ from .issues import (
 )
 
 
-
 def detect_test_coverage(
     graph: dict,
     zone_map: FileZoneMap,

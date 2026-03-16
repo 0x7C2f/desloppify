@@ -7,11 +7,9 @@ from unittest.mock import MagicMock, patch
 from desloppify.languages.python.detectors.ruff_smells import detect_with_ruff_smells
 from desloppify.languages.python.detectors.unused import detect_unused
 
-
 # ── Ruff --exclude integration ───────────────────────────────────────────────
 
 
-from desloppify.languages.python.detectors.unused import detect_unused  # noqa: E402
 
 
 class TestRuffSmellsExcludeFlag:

@@ -9,6 +9,7 @@ from desloppify.languages.python.detectors.dict_keys import (
     _get_name,
     _get_str_key,
 )
+
 from .visitor_helpers import (
     analyze_scope_issues,
     mark_assignment_escape,

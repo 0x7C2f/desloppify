@@ -15,7 +15,7 @@ from desloppify.languages.rust.support import (
 )
 
 from ._shared import (
-    _argument_count,
+    _ENUM_VARIANT_RE,
     _GETTER_RE,
     _INTO_RE,
     _NON_EXHAUSTIVE_RE,
@@ -23,8 +23,9 @@ from ._shared import (
     _PUBLIC_FIELD_RE,
     _USE_STATEMENT_RE,
     _WRAPPER_GETTER_NAMES,
-    _ENUM_VARIANT_RE,
+    _argument_count,
     _entry,
+    _group_files_by_manifest,
     _has_manual_thread_contract,
     _has_public_panic_path,
     _has_python_binding_attrs,
@@ -34,12 +35,11 @@ from ._shared import (
     _is_test_content,
     _iter_public_functions,
     _iter_public_types,
+    _line_number,
     _looks_like_ffi_surface,
     _looks_like_plain_getter,
-    _line_number,
     _should_skip_future_proofing,
     _starts_with_same_crate_import,
-    _group_files_by_manifest,
 )
 
 
@@ -227,7 +227,7 @@ def detect_thread_safety_contracts(path: Path) -> tuple[list[dict], int]:
     """Flag manual Send/Sync contracts without visible assertion tests."""
     entries: list[dict] = []
     by_manifest = _group_files_by_manifest(path)
-    for manifest_dir, files in by_manifest.items():
+    for _manifest_dir, files in by_manifest.items():
         corpus_parts: list[str] = []
         for filepath in files:
             absolute = Path(resolve_path(filepath))

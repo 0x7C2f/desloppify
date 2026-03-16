@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from . import state
 from ..base.types import LangConfig
 from ..contract_validation import validate_lang_contract
+from . import state
 from .discovery import load_all, reset_runtime_state
 
 _MARKER_GLOB_CHARS = ("*", "?", "[")

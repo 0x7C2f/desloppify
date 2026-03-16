@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TypedDict
+from typing import Any, TypedDict, cast
 
 from desloppify.base.text_utils import is_numeric
 from desloppify.engine._scoring.policy.core import (
@@ -54,19 +54,14 @@ def _mechanical_dimension_weight(name: str) -> float:
     )
 
 
-def _subjective_dimension_weight(name: str, data: dict) -> float:
-    subjective_meta = (
-        data.get("detectors", {}).get("subjective_assessment", {})
-        if isinstance(data, dict)
-        else {}
-    )
-    configured = (
-        subjective_meta.get("configured_weight")
-        if isinstance(subjective_meta, dict)
-        else None
-    )
+def _subjective_dimension_weight(name: str, data: dict[str, Any]) -> float:
+    detectors: dict[str, Any] = data.get("detectors", {})
+    subjective_meta: dict[str, Any] = detectors.get("subjective_assessment", {})
+    configured: Any = subjective_meta.get("configured_weight")
     if is_numeric(configured):
-        return max(0.0, float(configured))
+        # Type narrowing: after is_numeric returns True, configured is int | float
+        numeric_value: int | float = cast(int | float, configured)
+        return max(0.0, float(numeric_value))
 
     return float(
         SUBJECTIVE_DIMENSION_WEIGHTS.get(
@@ -218,7 +213,7 @@ def _breakdown_entries(
 
 
 def compute_health_breakdown(
-    dimension_scores: dict,
+    dimension_scores: dict[str, dict[str, Any]],
     *,
     score_key: str = "score",
 ) -> HealthBreakdown:

@@ -11,6 +11,14 @@ from unittest.mock import patch
 
 import pytest
 
+from desloppify.languages._framework.generic_parts.parsers import ToolParserError
+from desloppify.languages._framework.generic_parts.tool_runner import (
+    resolve_command_argv,
+    run_tool_result,
+)
+from desloppify.languages._framework.generic_parts.tool_spec import (
+    normalize_tool_specs,
+)
 from desloppify.languages._framework.generic_support.core import (
     generic_lang,
     make_file_finder,
@@ -21,14 +29,6 @@ from desloppify.languages._framework.generic_support.core import (
     parse_golangci,
     parse_json,
     parse_rubocop,
-)
-from desloppify.languages._framework.generic_parts.parsers import ToolParserError
-from desloppify.languages._framework.generic_parts.tool_runner import (
-    resolve_command_argv,
-    run_tool_result,
-)
-from desloppify.languages._framework.generic_parts.tool_spec import (
-    normalize_tool_specs,
 )
 
 
@@ -398,8 +398,8 @@ class TestToolSpecNormalization:
 @pytest.mark.usefixtures("_cleanup_registry")
 class TestGenericLang:
     def test_registers_and_resolves(self):
-        from desloppify.languages._framework.registry import state as registry_state
         from desloppify.languages._framework.base.types import LangConfig
+        from desloppify.languages._framework.registry import state as registry_state
 
         cfg = generic_lang(
             name="test_generic_lang_1",

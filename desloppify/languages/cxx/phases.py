@@ -3,19 +3,21 @@
 from __future__ import annotations
 
 import hashlib
-from pathlib import Path
 import shlex
+from pathlib import Path
 
 from desloppify.base.output.terminal import log
-from desloppify.engine.detectors.base import ComplexitySignal
 from desloppify.engine._state.filtering import make_issue
+from desloppify.engine.detectors.base import ComplexitySignal
 from desloppify.languages._framework.base.shared_phases import (
     run_coupling_phase,
     run_structural_phase,
- )
+)
 from desloppify.languages._framework.base.types import LangRuntimeContract
 from desloppify.languages._framework.generic_parts.parsers import PARSERS
-from desloppify.languages._framework.generic_parts.tool_factories import _record_tool_failure_coverage
+from desloppify.languages._framework.generic_parts.tool_factories import (
+    _record_tool_failure_coverage,
+)
 from desloppify.languages._framework.generic_parts.tool_runner import run_tool_result
 from desloppify.languages.cxx._helpers import build_cxx_dep_graph
 from desloppify.languages.cxx.extractors import find_cxx_files

@@ -8,16 +8,15 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import desloppify.app.commands.detect as detect_cmd_mod
+import desloppify.app.commands.langs.cmd as langs_cmd_mod
 import desloppify.app.commands.review.runtime.setup as review_runtime_setup_mod
 import desloppify.app.commands.scan.contracts as scan_contracts_mod
 import desloppify.app.commands.scan.coverage as scan_coverage_mod
 import desloppify.app.commands.scan.workflow as scan_workflow_mod
-import desloppify.app.commands.langs.cmd as langs_cmd_mod
 import desloppify.engine._scoring.state_coverage as state_coverage_mod
 import desloppify.engine._state.schema_types as state_schema_types_mod
 import desloppify.engine.planning.scan as planning_scan_mod
 import desloppify.languages as languages_mod
-import desloppify.languages.framework as public_framework_mod
 import desloppify.languages._framework as framework_root_mod
 import desloppify.languages._framework.commands.registry as registry_cmd_mod
 import desloppify.languages._framework.commands.scaffold as scaffold_mod
@@ -30,6 +29,7 @@ import desloppify.languages._framework.treesitter.analysis.cohesion as treesitte
 import desloppify.languages._framework.treesitter.imports.cache as treesitter_cache_mod
 import desloppify.languages._framework.treesitter.specs.specs as treesitter_specs_mod
 import desloppify.languages.dart.commands as dart_commands_mod
+import desloppify.languages.framework as public_framework_mod
 import desloppify.languages.go.commands as go_commands_mod
 import desloppify.languages.python.commands as python_commands_mod
 import desloppify.languages.typescript.commands as ts_commands_mod

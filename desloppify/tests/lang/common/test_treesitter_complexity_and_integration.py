@@ -14,14 +14,16 @@ pytestmark = pytest.mark.skipif(
 
 class TestASTComplexity:
     def test_nesting_depth(self, tmp_path):
+        from desloppify.languages._framework.treesitter.analysis.complexity_nesting import (
+            compute_nesting_depth_ts,
+        )
+        from desloppify.languages._framework.treesitter.analysis.extractors import (
+            _get_parser,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             disable_parse_cache,
             enable_parse_cache,
         )
-        from desloppify.languages._framework.treesitter.analysis.complexity_nesting import (
-            compute_nesting_depth_ts,
-        )
-        from desloppify.languages._framework.treesitter.analysis.extractors import _get_parser
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
         code = """\
@@ -50,14 +52,16 @@ func complex() {
             disable_parse_cache()
 
     def test_nesting_depth_flat_file(self, tmp_path):
+        from desloppify.languages._framework.treesitter.analysis.complexity_nesting import (
+            compute_nesting_depth_ts,
+        )
+        from desloppify.languages._framework.treesitter.analysis.extractors import (
+            _get_parser,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             disable_parse_cache,
             enable_parse_cache,
         )
-        from desloppify.languages._framework.treesitter.analysis.complexity_nesting import (
-            compute_nesting_depth_ts,
-        )
-        from desloppify.languages._framework.treesitter.analysis.extractors import _get_parser
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
         code = """\
@@ -81,12 +85,12 @@ func simple() {
             disable_parse_cache()
 
     def test_long_functions_compute(self, tmp_path):
+        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
+            make_long_functions_compute,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             disable_parse_cache,
             enable_parse_cache,
-        )
-        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
-            make_long_functions_compute,
         )
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
@@ -109,12 +113,12 @@ func simple() {
             disable_parse_cache()
 
     def test_long_functions_no_big_fn(self, tmp_path):
+        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
+            make_long_functions_compute,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             disable_parse_cache,
             enable_parse_cache,
-        )
-        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
-            make_long_functions_compute,
         )
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
@@ -163,7 +167,9 @@ add(A, B) ->
         from desloppify.languages._framework.treesitter.analysis.extractors import (
             ts_extract_functions,
         )
-        from desloppify.languages._framework.treesitter.specs.functional import ERLANG_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            ERLANG_SPEC,
+        )
 
         functions = ts_extract_functions(tmp_path, ERLANG_SPEC, [erlang_file])
         # Erlang functions — at least some should be extracted.
@@ -198,7 +204,9 @@ end
         from desloppify.languages._framework.treesitter.analysis.extractors import (
             ts_extract_functions,
         )
-        from desloppify.languages._framework.treesitter.specs.functional import OCAML_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            OCAML_SPEC,
+        )
 
         functions = ts_extract_functions(tmp_path, OCAML_SPEC, [ocaml_file])
         assert len(functions) >= 1
@@ -228,7 +236,9 @@ let add a b =
         from desloppify.languages._framework.treesitter.analysis.extractors import (
             ts_extract_functions,
         )
-        from desloppify.languages._framework.treesitter.specs.functional import FSHARP_SPEC
+        from desloppify.languages._framework.treesitter.specs.functional import (
+            FSHARP_SPEC,
+        )
 
         functions = ts_extract_functions(tmp_path, FSHARP_SPEC, [fsharp_file])
         # F# let bindings may or may not match — depends on grammar details.
@@ -280,12 +290,12 @@ class TestNewLanguageIntegration:
 
 class TestCyclomaticComplexity:
     def test_cyclomatic_simple(self, tmp_path):
+        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
+            make_cyclomatic_complexity_compute,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             disable_parse_cache,
             enable_parse_cache,
-        )
-        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
-            make_cyclomatic_complexity_compute,
         )
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
@@ -322,12 +332,12 @@ func decide(x int) int {
             disable_parse_cache()
 
     def test_cyclomatic_trivial(self, tmp_path):
+        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
+            make_cyclomatic_complexity_compute,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             disable_parse_cache,
             enable_parse_cache,
-        )
-        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
-            make_cyclomatic_complexity_compute,
         )
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
@@ -347,12 +357,12 @@ func decide(x int) int {
 
 class TestMaxParams:
     def test_many_params(self, tmp_path):
+        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
+            make_max_params_compute,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             disable_parse_cache,
             enable_parse_cache,
-        )
-        from desloppify.languages._framework.treesitter.analysis.complexity_function_metrics import (
-            make_max_params_compute,
         )
         from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
@@ -380,12 +390,12 @@ func manyArgs(a, b, c, d, e, f, g int) int {
 
 class TestCallbackDepth:
     def test_nested_callbacks(self, tmp_path):
+        from desloppify.languages._framework.treesitter.analysis.complexity_nesting import (
+            make_callback_depth_compute,
+        )
         from desloppify.languages._framework.treesitter.imports.cache import (
             disable_parse_cache,
             enable_parse_cache,
-        )
-        from desloppify.languages._framework.treesitter.analysis.complexity_nesting import (
-            make_callback_depth_compute,
         )
         from desloppify.languages._framework.treesitter.specs.scripting import JS_SPEC
 
@@ -617,10 +627,10 @@ class TestResponsibilityCohesion:
 
 class TestUnusedImports:
     def test_unused_import_detected(self, tmp_path):
-        from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
         from desloppify.languages._framework.treesitter.analysis.unused_imports import (
             detect_unused_imports,
         )
+        from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
         code = """\
 package main
@@ -643,10 +653,10 @@ func main() {
         assert "fmt" not in names
 
     def test_no_unused_imports(self, tmp_path):
-        from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
         from desloppify.languages._framework.treesitter.analysis.unused_imports import (
             detect_unused_imports,
         )
+        from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
         code = """\
 package main
@@ -665,10 +675,10 @@ func main() {
 
     def test_go_aliased_import_not_false_positive(self, tmp_path):
         """Go-style aliased imports (alias before path) should use the alias name."""
-        from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
         from desloppify.languages._framework.treesitter.analysis.unused_imports import (
             detect_unused_imports,
         )
+        from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
         code = """\
 package main
@@ -695,10 +705,10 @@ func main() {
 
     def test_go_aliased_import_unused(self, tmp_path):
         """Go-style aliased import that IS unused should be detected."""
-        from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
         from desloppify.languages._framework.treesitter.analysis.unused_imports import (
             detect_unused_imports,
         )
+        from desloppify.languages._framework.treesitter.specs.compiled import GO_SPEC
 
         code = """\
 package main

@@ -147,7 +147,7 @@ def test_run_rustdoc_result_scans_each_workspace_library_package(tmp_path):
             },
         ],
     }
-    rustdoc_message = lambda file_name, line_no: json.dumps(
+    rustdoc_message = lambda file_name, line_no: json.dumps(  # type: ignore[E731]
         {
             "reason": "compiler-message",
             "message": {

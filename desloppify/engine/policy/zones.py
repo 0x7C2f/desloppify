@@ -10,7 +10,7 @@ import logging
 import os
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 
 from desloppify.base.output.fallbacks import log_best_effort_failure
 from desloppify.engine.policy.zones_data import (
@@ -23,7 +23,7 @@ from desloppify.engine.policy.zones_data import (
 logger = logging.getLogger(__name__)
 
 
-class Zone(str, Enum):
+class Zone(StrEnum):
     """File intent zone — determines scoring and detection policy."""
 
     PRODUCTION = "production"

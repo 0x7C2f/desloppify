@@ -8,9 +8,12 @@ from unittest.mock import patch
 
 import pytest
 
-from desloppify.languages._framework.generic_support.core import capability_report, generic_lang
 from desloppify.languages._framework.generic_parts.tool_factories import (
     make_generic_fixer,
+)
+from desloppify.languages._framework.generic_support.core import (
+    capability_report,
+    generic_lang,
 )
 
 

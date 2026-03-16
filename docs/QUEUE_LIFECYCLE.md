@@ -34,6 +34,7 @@ Queue-tracked work is completed by explicit user actions such as
 `desloppify plan resolve`, `plan skip --permanent`, or `plan reopen`.
 
 Scans and review imports may:
+
 - add new work
 - reopen previously completed work when it reappears
 - corroborate an existing manual resolution

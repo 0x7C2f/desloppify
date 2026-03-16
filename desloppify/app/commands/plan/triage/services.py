@@ -11,12 +11,12 @@ from desloppify.app.commands.helpers.command_runtime import (
     CommandRuntime,
     command_runtime,
 )
+from desloppify.engine.plan_ops import append_log_entry
 from desloppify.engine.plan_state import (
     PlanModel,
     load_plan,
     save_plan,
 )
-from desloppify.engine.plan_ops import append_log_entry
 from desloppify.engine.plan_triage import (
     TriageInput,
     build_triage_prompt,

@@ -30,7 +30,11 @@ from desloppify.languages.cxx.extractors import (
     extract_all_cxx_functions,
     find_cxx_files,
 )
-from desloppify.languages.cxx.phases import phase_coupling, phase_cppcheck_issue, phase_structural
+from desloppify.languages.cxx.phases import (
+    phase_coupling,
+    phase_cppcheck_issue,
+    phase_structural,
+)
 from desloppify.languages.cxx.review import (
     HOLISTIC_REVIEW_DIMENSIONS,
     LOW_VALUE_PATTERN,

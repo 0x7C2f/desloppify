@@ -11,6 +11,7 @@ from typing import Any
 from desloppify.base.discovery.file_paths import rel, resolve_path
 from desloppify.base.discovery.paths import get_project_root
 from desloppify.base.discovery.source import SourceDiscoveryOptions, find_source_files
+
 RUST_FILE_EXCLUSIONS = ["target", ".git", "node_modules", "vendor"]
 USE_STATEMENT_RE = re.compile(r"(?m)^\s*(?:pub(?:\([^)]*\))?\s+)?use\s+([^;]+);")
 PUB_USE_STATEMENT_RE = re.compile(r"(?m)^\s*pub(?:\([^)]*\))?\s+use\s+([^;]+);")

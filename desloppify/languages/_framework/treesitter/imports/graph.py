@@ -7,8 +7,8 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-from .cache import get_or_parse_tree
 from ..analysis.extractors import _get_parser, _make_query, _run_query, _unwrap_node
+from .cache import get_or_parse_tree
 
 if TYPE_CHECKING:
     from desloppify.languages._framework.treesitter import TreeSitterLangSpec

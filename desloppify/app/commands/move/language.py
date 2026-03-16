@@ -9,8 +9,8 @@ from types import ModuleType
 from desloppify.app.commands.helpers.dynamic_loaders import (
     load_language_move_module as load_dynamic_language_move_module,
 )
-from desloppify.languages import framework as lang_mod
 from desloppify.app.commands.helpers.lang import load_lang_config_metadata, resolve_lang
+from desloppify.languages import framework as lang_mod
 
 
 def _build_ext_to_lang_map() -> dict[str, str]:

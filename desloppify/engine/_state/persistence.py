@@ -20,6 +20,7 @@ except ImportError:
     fcntl = None  # type: ignore[assignment]
 
 from desloppify.base.exception_sets import PLAN_LOAD_EXCEPTIONS
+
 __all__ = [
     "load_state",
     "save_state",
@@ -30,7 +31,6 @@ from desloppify.base.discovery.file_paths import safe_write_text
 from desloppify.base.text_utils import is_numeric
 from desloppify.engine._plan.persistence import load_plan as load_plan_state
 from desloppify.engine._plan.persistence import plan_path_for_state
-from desloppify.engine.plan_state import PlanLoadStatus
 from desloppify.engine._state.recovery import (
     has_saved_plan_without_scan,
     reconstruct_state_from_saved_plan,
@@ -45,6 +45,7 @@ from desloppify.engine._state.schema import (
     scan_source,
     validate_state_invariants,
 )
+from desloppify.engine.plan_state import PlanLoadStatus
 
 logger = logging.getLogger(__name__)
 
@@ -295,7 +296,7 @@ def save_state(
     serialized_state = {
         key: value for key, value in state.items() if key != "issues"
     }
-    serialized_state["work_items"] = dict((state.get("work_items") or state.get("issues", {})))
+    serialized_state["work_items"] = dict(state.get("work_items") or state.get("issues", {}))
     content = json.dumps(serialized_state, indent=2, default=json_default) + "\n"
 
     if state_path.exists():

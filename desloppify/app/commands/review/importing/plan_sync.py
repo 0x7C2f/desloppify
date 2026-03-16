@@ -17,18 +17,18 @@ from desloppify.engine._plan.persistence import (
     plan_path_for_state,
     save_plan,
 )
-from desloppify.engine._plan.sync.review_import import (
-    ReviewImportSyncResult,
-    sync_plan_after_review_import,
-)
+from desloppify.engine._plan.refresh_lifecycle import mark_subjective_review_completed
 from desloppify.engine._plan.sync import (
     ReconcileResult,
     live_planned_queue_empty,
     reconcile_plan,
 )
-from desloppify.engine._plan.sync.workflow_gates import sync_import_scores_needed
+from desloppify.engine._plan.sync.review_import import (
+    ReviewImportSyncResult,
+    sync_plan_after_review_import,
+)
 from desloppify.engine._plan.sync.workflow import clear_score_communicated_sentinel
-from desloppify.engine._plan.refresh_lifecycle import mark_subjective_review_completed
+from desloppify.engine._plan.sync.workflow_gates import sync_import_scores_needed
 from desloppify.engine.plan_triage import (
     TRIAGE_CMD_RUN_STAGES_CLAUDE,
     TRIAGE_CMD_RUN_STAGES_CODEX,

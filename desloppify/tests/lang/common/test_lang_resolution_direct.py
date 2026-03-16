@@ -6,8 +6,8 @@ from types import SimpleNamespace
 
 import pytest
 
-import desloppify.languages._framework.registry.state as registry_state
 import desloppify.languages._framework.registry.resolution as lang_resolution_mod
+import desloppify.languages._framework.registry.state as registry_state
 
 
 def test_make_lang_config_wraps_constructor_errors():

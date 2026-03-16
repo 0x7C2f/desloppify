@@ -5,8 +5,8 @@ Go plugin originally contributed by tinker495 (PR #128).
 
 from __future__ import annotations
 
-from desloppify.engine.policy.zones import FileZoneMap, Zone
 from desloppify.engine.hook_registry import get_lang_hook
+from desloppify.engine.policy.zones import FileZoneMap, Zone
 from desloppify.languages import get_lang
 
 

@@ -7,7 +7,6 @@ import re
 from pathlib import Path
 
 from desloppify.base.discovery.file_paths import resolve_path
-
 from desloppify.base.discovery.source import SourceDiscoveryOptions, find_source_files
 from desloppify.engine.detectors.base import FunctionInfo
 

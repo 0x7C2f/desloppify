@@ -7,12 +7,12 @@ from typing import Any, NotRequired, Required, TypedDict
 from desloppify.engine._state.schema_types_issues import (
     DimensionScore,
     Issue,
-    WorkItem,
     ScanHistoryEntry,
     ScoreConfidenceDetector,
     ScoreConfidenceModel,
     StateStats,
     TierStats,
+    WorkItem,
 )
 from desloppify.engine._state.schema_types_review import (
     AssessmentImportAuditEntry,

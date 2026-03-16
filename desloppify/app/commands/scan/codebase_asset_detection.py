@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import json
 import re
-from pathlib import Path
-
 import tomllib
+from pathlib import Path
+from typing import Any, cast
 
 _BASE_SKILLS = ("code-review", "plan", "update-codemaps", "update-docs", "verify")
 _DEP_SPLIT_RE = re.compile(r"[\s<>=!~\[\];]")
@@ -71,7 +71,7 @@ def detect_codebase_signals(
 
 def select_skills(signals: set[str]) -> list[str]:
     """Choose the local skills that fit the detected codebase."""
-    selected = set(_BASE_SKILLS)
+    selected: set[str] = set(_BASE_SKILLS)
     if "backend" in signals:
         selected.add("multi-backend")
     if "frontend" in signals:
@@ -109,16 +109,15 @@ def _json_dependency_names(
     if not path.is_file():
         return set()
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload = cast(dict[str, Any], json.loads(path.read_text(encoding="utf-8")))
     except (json.JSONDecodeError, OSError) as exc:
         if warnings is not None:
             warnings.append(f"Could not parse `{path.name}` for asset detection: {exc}")
         return set()
     names: set[str] = set()
     for section in sections:
-        deps = payload.get(section, {})
-        if isinstance(deps, dict):
-            names.update(name.strip().lower() for name in deps if isinstance(name, str))
+        deps = cast(dict[str, Any], payload.get(section, {}))
+        names.update(name.strip().lower() for name in deps)
     return names
 
 
@@ -136,29 +135,24 @@ def _python_dependency_names(
             warnings.append(f"Could not parse `{path.name}` for asset detection: {exc}")
         return set()
     names: set[str] = set()
-    project = payload.get("project", {})
-    if isinstance(project, dict):
-        for dependency in project.get("dependencies", []) or []:
+    project = cast(dict[str, Any], payload.get("project", {}))
+    dependencies = cast(list[Any], project.get("dependencies", []))
+    for dependency in dependencies or []:
+        if isinstance(dependency, str):
+            names.add(_normalize_dependency_name(dependency))
+    optionals = cast(dict[str, list[Any]], project.get("optional-dependencies", {}))
+    for group in optionals.values():
+        for dependency in group or []:
             if isinstance(dependency, str):
                 names.add(_normalize_dependency_name(dependency))
-        optionals = project.get("optional-dependencies", {})
-        if isinstance(optionals, dict):
-            for group in optionals.values():
-                for dependency in group or []:
-                    if isinstance(dependency, str):
-                        names.add(_normalize_dependency_name(dependency))
-    poetry = payload.get("tool", {}).get("poetry", {})
-    if isinstance(poetry, dict):
-        dependencies = poetry.get("dependencies", {})
-        if isinstance(dependencies, dict):
-            names.update(_normalize_dependency_name(name) for name in dependencies if isinstance(name, str))
-        groups = poetry.get("group", {})
-        if isinstance(groups, dict):
-            for group in groups.values():
-                if isinstance(group, dict):
-                    group_deps = group.get("dependencies", {})
-                    if isinstance(group_deps, dict):
-                        names.update(_normalize_dependency_name(name) for name in group_deps if isinstance(name, str))
+    tool = payload.get("tool", {})
+    poetry = cast(dict[str, Any], cast(dict[str, Any], tool).get("poetry", {})) if isinstance(tool, dict) else {}
+    dependencies = cast(dict[str, Any], poetry.get("dependencies", {}))
+    names.update(_normalize_dependency_name(name) for name in dependencies)
+    groups = cast(dict[str, dict[str, Any]], poetry.get("group", {}))
+    for group in groups.values():
+        group_deps = cast(dict[str, Any], group.get("dependencies", {}))
+        names.update(_normalize_dependency_name(name) for name in group_deps)
     return {name for name in names if name}
 
 

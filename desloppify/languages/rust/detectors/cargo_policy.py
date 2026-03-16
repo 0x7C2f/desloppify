@@ -5,7 +5,11 @@ from __future__ import annotations
 from pathlib import Path
 
 from desloppify.base.discovery.file_paths import rel, resolve_path
-from desloppify.languages.rust.support import find_rust_files, read_text_or_none, strip_rust_comments
+from desloppify.languages.rust.support import (
+    find_rust_files,
+    read_text_or_none,
+    strip_rust_comments,
+)
 
 from ._shared import (
     _FEATURE_REF_RE,

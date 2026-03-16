@@ -13,8 +13,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
 
-from desloppify.base.exception_sets import PLAN_LOAD_EXCEPTIONS
 from desloppify.base.discovery.file_paths import safe_write_text
+from desloppify.base.exception_sets import PLAN_LOAD_EXCEPTIONS
 from desloppify.base.output.fallbacks import log_best_effort_failure
 from desloppify.engine._plan.schema import (
     PLAN_VERSION,

@@ -14,23 +14,25 @@ from desloppify.engine._plan.constants import (
     WORKFLOW_DEFERRED_DISPOSITION_ID,
     WORKFLOW_RUN_SCAN_ID,
 )
-from desloppify.engine._plan.schema import (
-    executable_objective_ids as _executable_objective_ids,
-    live_planned_queue_ids as _live_planned_queue_ids,
-)
 from desloppify.engine._plan.refresh_lifecycle import (
     LIFECYCLE_PHASE_ASSESSMENT_POSTFLIGHT,
     LIFECYCLE_PHASE_EXECUTE,
+    LIFECYCLE_PHASE_REVIEW,
     LIFECYCLE_PHASE_REVIEW_INITIAL,
     LIFECYCLE_PHASE_REVIEW_POSTFLIGHT,
-    LIFECYCLE_PHASE_REVIEW,
     LIFECYCLE_PHASE_SCAN,
-    LIFECYCLE_PHASE_TRIAGE_POSTFLIGHT,
     LIFECYCLE_PHASE_TRIAGE,
-    LIFECYCLE_PHASE_WORKFLOW_POSTFLIGHT,
+    LIFECYCLE_PHASE_TRIAGE_POSTFLIGHT,
     LIFECYCLE_PHASE_WORKFLOW,
+    LIFECYCLE_PHASE_WORKFLOW_POSTFLIGHT,
     current_lifecycle_phase,
     postflight_scan_pending,
+)
+from desloppify.engine._plan.schema import (
+    executable_objective_ids as _executable_objective_ids,
+)
+from desloppify.engine._plan.schema import (
+    live_planned_queue_ids as _live_planned_queue_ids,
 )
 from desloppify.engine._plan.triage.snapshot import build_triage_snapshot
 from desloppify.engine._state.filtering import path_scoped_issues

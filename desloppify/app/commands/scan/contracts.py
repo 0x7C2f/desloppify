@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any, TypedDict
 
+from desloppify.engine._scoring.results.health import HealthBreakdown
 from desloppify.languages.framework import DetectorCoverageRecord, ScanCoverageRecord
 
 
@@ -36,7 +37,8 @@ class ScanQueryPayload(TypedDict, total=False):
     open_scope: dict[str, int] | None
     warnings: list[str]
     dimension_scores: dict[str, object] | None
-    score_breakdown: dict[str, object] | None
+    score_breakdown: HealthBreakdown | None
+    plan: dict[str, object] | None
     subjective_integrity: dict[str, object] | None
     score_confidence: dict[str, object] | None
     potentials: dict[str, object] | None

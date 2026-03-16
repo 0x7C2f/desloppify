@@ -772,11 +772,11 @@ class TestQueueGuardScanPath:
     def test_queue_guard_respects_scan_path_from_state(self):
         """_check_queue_order_guard uses build_work_queue which auto-reads
         scan_path from state, so out-of-scope items don't appear in the queue."""
-        from desloppify.app.commands.resolve.queue_guard import _check_queue_order_guard
         from desloppify.app.commands.resolve.plan_load import (
             DegradedPlanWarningState,
             ResolvePlanAccess,
         )
+        from desloppify.app.commands.resolve.queue_guard import _check_queue_order_guard
 
         state = {
             "issues": {

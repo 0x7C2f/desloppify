@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import importlib
 
-from desloppify.languages._framework.base.types import FixerConfig
 import desloppify.languages.typescript.detectors.logs as logs_detector_mod
 import desloppify.languages.typescript.detectors.smells as smells_detector_mod
 import desloppify.languages.typescript.detectors.unused as unused_detector_mod
+from desloppify.languages._framework.base.types import FixerConfig
 
 _FIXERS_MODULE = "desloppify.languages.typescript.fixers"
 

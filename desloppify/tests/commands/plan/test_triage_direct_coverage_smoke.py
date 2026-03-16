@@ -4,19 +4,19 @@ from __future__ import annotations
 
 import inspect
 
-from desloppify.app.commands.plan.shared.cluster_membership import cluster_issue_ids
-from desloppify.app.commands.plan.triage.plan_state_access import ensure_execution_log
 import desloppify.app.commands.plan.triage.command as triage_command_mod
+import desloppify.app.commands.plan.triage.display.dashboard as triage_display_mod
+import desloppify.app.commands.plan.triage.display.layout as triage_display_layout_mod
 import desloppify.app.commands.plan.triage.helpers as triage_helpers_mod
+import desloppify.app.commands.plan.triage.runner.codex_runner as triage_codex_runner_mod
+import desloppify.app.commands.plan.triage.runner.orchestrator_codex_observe as triage_observe_mod
+import desloppify.app.commands.plan.triage.runner.orchestrator_codex_parallel as triage_parallel_mod
+import desloppify.app.commands.plan.triage.runner.orchestrator_common as triage_orchestrator_mod
 import desloppify.app.commands.plan.triage.services as triage_services_mod
 import desloppify.app.commands.plan.triage.stages.completion as triage_completion_mod
 import desloppify.app.commands.plan.triage.workflow as triage_workflow_mod
-import desloppify.app.commands.plan.triage.runner.codex_runner as triage_codex_runner_mod
-import desloppify.app.commands.plan.triage.runner.orchestrator_common as triage_orchestrator_mod
-import desloppify.app.commands.plan.triage.runner.orchestrator_codex_observe as triage_observe_mod
-import desloppify.app.commands.plan.triage.runner.orchestrator_codex_parallel as triage_parallel_mod
-import desloppify.app.commands.plan.triage.display.dashboard as triage_display_mod
-import desloppify.app.commands.plan.triage.display.layout as triage_display_layout_mod
+from desloppify.app.commands.plan.shared.cluster_membership import cluster_issue_ids
+from desloppify.app.commands.plan.triage.plan_state_access import ensure_execution_log
 
 
 def test_triage_helper_modules_direct_coverage_smoke() -> None:

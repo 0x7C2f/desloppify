@@ -9,9 +9,8 @@ from pathlib import Path
 from typing import Any
 
 from desloppify.base.discovery.file_paths import resolve_path
-
-from desloppify.base.discovery.source import find_py_files
 from desloppify.base.discovery.paths import get_project_root
+from desloppify.base.discovery.source import find_py_files
 from desloppify.engine.detectors.graph import finalize_graph
 from desloppify.languages.python.detectors.deps_dynamic import (
     find_python_dynamic_imports,

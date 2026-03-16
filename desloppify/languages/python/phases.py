@@ -5,13 +5,13 @@ from __future__ import annotations
 from pathlib import Path
 
 from desloppify.base.output.terminal import log
-from desloppify.engine.detectors.base import ComplexitySignal, GodRule
 from desloppify.engine._state.filtering import make_issue
+from desloppify.engine.detectors.base import ComplexitySignal, GodRule
 from desloppify.engine.policy.zones import adjust_potential, filter_entries
+from desloppify.languages._framework.base.types import LangRuntimeContract
 from desloppify.languages._framework.issue_factories import (
     make_unused_issues,
 )
-from desloppify.languages._framework.base.types import LangRuntimeContract
 from desloppify.languages.python.detectors import (
     responsibility_cohesion as cohesion_detector_mod,
 )

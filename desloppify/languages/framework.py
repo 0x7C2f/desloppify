@@ -6,8 +6,6 @@ Use this module from app/engine layers instead of importing
 
 from __future__ import annotations
 
-from desloppify.languages._framework.registry import discovery as _discovery_mod
-from desloppify.languages._framework.registry import state as registry_state
 from desloppify.languages._framework.base.types import (
     BoundaryRule,
     DetectorCoverageRecord,
@@ -19,16 +17,18 @@ from desloppify.languages._framework.base.types import (
     LangSecurityResult,
     ScanCoverageRecord,
 )
-from desloppify.languages._framework.runtime_support.runtime import (
-    LangRun,
-    LangRunOverrides,
-    make_lang_run,
-)
+from desloppify.languages._framework.registry import discovery as _discovery_mod
+from desloppify.languages._framework.registry import state as registry_state
 from desloppify.languages._framework.registry.resolution import (
     auto_detect_lang,
     available_langs,
     get_lang,
     make_lang_config,
+)
+from desloppify.languages._framework.runtime_support.runtime import (
+    LangRun,
+    LangRunOverrides,
+    make_lang_run,
 )
 
 load_all = _discovery_mod.load_all
@@ -54,14 +54,18 @@ def capability_report(cfg: LangRun) -> tuple[list[str], list[str]] | None:
 
 def enable_parse_cache() -> None:
     """Enable tree-sitter parse cache via facade boundary."""
-    from desloppify.languages._framework.treesitter import enable_parse_cache as _enable_parse_cache
+    from desloppify.languages._framework.treesitter import (
+        enable_parse_cache as _enable_parse_cache,
+    )
 
     _enable_parse_cache()
 
 
 def disable_parse_cache() -> None:
     """Disable tree-sitter parse cache via facade boundary."""
-    from desloppify.languages._framework.treesitter import disable_parse_cache as _disable_parse_cache
+    from desloppify.languages._framework.treesitter import (
+        disable_parse_cache as _disable_parse_cache,
+    )
 
     _disable_parse_cache()
 

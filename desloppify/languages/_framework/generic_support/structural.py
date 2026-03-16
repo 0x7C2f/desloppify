@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Callable
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable
+from typing import TYPE_CHECKING
 
 from desloppify.languages._framework.base.types import DetectorPhase
 from desloppify.languages._framework.treesitter import (

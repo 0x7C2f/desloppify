@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 
 from desloppify.app.commands.helpers.lang import load_lang_config
+
 from .parser_groups_admin_review import _add_review_parser  # noqa: F401 (re-export)
 
 logger = logging.getLogger(__name__)

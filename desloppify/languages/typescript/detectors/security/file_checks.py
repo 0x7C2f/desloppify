@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import re
 
-from desloppify.languages.typescript.detectors.security.entries import _make_security_entry
+from desloppify.base.signal_patterns import AUTH_LOOKUP_TOKEN_RE
+from desloppify.languages.typescript.detectors.security.entries import (
+    _make_security_entry,
+)
 from desloppify.languages.typescript.detectors.security.patterns import (
     _AUTH_CHECK_RE,
     _CREATE_VIEW_RE,
@@ -14,7 +17,6 @@ from desloppify.languages.typescript.detectors.security.patterns import (
     _SECURITY_INVOKER_RE,
     _SERVE_ASYNC_RE,
 )
-from desloppify.base.signal_patterns import AUTH_LOOKUP_TOKEN_RE
 
 _AUTH_DENIAL_RE = re.compile(
     r"\b(?:401|403|unauthori[sz]ed|forbidden)\b"

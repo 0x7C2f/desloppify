@@ -9,7 +9,7 @@ import desloppify.languages._framework.treesitter.analysis.complexity_shared as 
 
 
 class _FakeNode:
-    def __init__(self, node_type: str, children: list["_FakeNode"] | None = None) -> None:
+    def __init__(self, node_type: str, children: list[_FakeNode] | None = None) -> None:
         self.type = node_type
         self.children = children or []
         self.child_count = len(self.children)

@@ -6,10 +6,10 @@ import inspect
 from pathlib import Path
 from typing import TypeVar
 
-from . import state
 from ..base.types import LangConfig
-from .resolution import make_lang_config
 from ..structure_validation import validate_lang_structure
+from . import state
+from .resolution import make_lang_config
 
 ConfigType = TypeVar("ConfigType")
 

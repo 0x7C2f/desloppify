@@ -1,5 +1,6 @@
 """Tests for desloppify.languages.typescript.detectors.smells.helpers."""
 
+from desloppify.languages.typescript.detectors.smells import TS_SMELL_CHECKS
 from desloppify.languages.typescript.detectors.smells.detector_core import (
     _find_function_start,
 )
@@ -25,7 +26,6 @@ from desloppify.languages.typescript.detectors.smells.helpers import (
     _track_brace_body,
     _ts_match_is_in_string,
 )
-from desloppify.languages.typescript.detectors.smells import TS_SMELL_CHECKS
 
 
 def _ctx(content: str, filepath: str = "test.ts") -> _FileContext:

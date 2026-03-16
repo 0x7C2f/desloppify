@@ -7,20 +7,6 @@ from pathlib import Path
 
 from desloppify.engine.plan_triage import TriageInput
 
-from ..stages.evidence_parsing import (
-    parse_observe_evidence,
-    validate_observe_evidence,
-    validate_reflect_skip_evidence,
-    validate_report_has_file_paths,
-    validate_report_references_clusters,
-)
-from ..validation.enrich_quality import evaluate_enrich_quality
-from ..validation.completion_policy import evaluate_completion_readiness
-from ..validation.enrich_checks import (
-    _cluster_file_overlaps,
-    _clusters_with_directory_scatter,
-    _clusters_with_high_step_ratio,
-)
 from ..completion_flow import count_log_activity_since
 from ..observe_batches import observe_dimension_breakdown
 from ..review_coverage import (
@@ -28,15 +14,28 @@ from ..review_coverage import (
     cluster_issue_ids,
     open_review_ids_from_state,
 )
+from ..stages.evidence_parsing import (
+    parse_observe_evidence,
+    parse_value_check_decision_ledger,
+    validate_observe_evidence,
+    validate_reflect_skip_evidence,
+    validate_report_has_file_paths,
+    validate_report_references_clusters,
+)
 from ..stages.helpers import (
     active_triage_issue_scope,
     scoped_manual_clusters_with_issues,
-    triage_scoped_plan,
     unclustered_review_issues,
     unenriched_clusters,
     value_check_targets,
 )
-from ..stages.evidence_parsing import parse_value_check_decision_ledger
+from ..validation.completion_policy import evaluate_completion_readiness
+from ..validation.enrich_checks import (
+    _cluster_file_overlaps,
+    _clusters_with_directory_scatter,
+    _clusters_with_high_step_ratio,
+)
+from ..validation.enrich_quality import evaluate_enrich_quality
 
 
 @dataclass(frozen=True)

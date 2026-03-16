@@ -7,9 +7,9 @@ This module remains a compatibility layer for internal aggregation.
 from __future__ import annotations
 
 from .compiled import (
+    C_SPEC,
     CPP_SPEC,
     CSHARP_SPEC,
-    C_SPEC,
     DART_SPEC,
     GO_SPEC,
     JAVA_SPEC,

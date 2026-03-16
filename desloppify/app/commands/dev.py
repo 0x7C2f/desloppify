@@ -9,9 +9,9 @@ import re
 
 from desloppify.app.commands.dev_scaffold_templates import build_scaffold_files
 from desloppify.base.discovery.file_paths import safe_write_text
+from desloppify.base.discovery.paths import get_project_root
 from desloppify.base.exception_sets import CommandError
 from desloppify.base.output.terminal import colorize
-from desloppify.base.discovery.paths import get_project_root
 
 
 def cmd_dev(args: argparse.Namespace) -> None:

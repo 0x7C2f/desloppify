@@ -7,6 +7,7 @@ from functools import lru_cache
 
 from desloppify.base.output.fallbacks import log_best_effort_failure
 
+
 def reset_import_cache() -> None:
     """Reset cached resolver state used by import helpers."""
     read_go_module_path.cache_clear()

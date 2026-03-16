@@ -23,9 +23,9 @@ from desloppify.engine._work_queue.snapshot import (
     PHASE_ASSESSMENT_POSTFLIGHT,
     PHASE_EXECUTE,
     PHASE_REVIEW_POSTFLIGHT,
+    PHASE_SCAN,
     PHASE_TRIAGE_POSTFLIGHT,
     PHASE_WORKFLOW_POSTFLIGHT,
-    PHASE_SCAN,
     build_queue_snapshot,
 )
 

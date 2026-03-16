@@ -9,11 +9,9 @@ from __future__ import annotations
 from pathlib import Path
 from types import SimpleNamespace
 
-
 import desloppify.app.commands.scan.plan_reconcile as reconcile_mod
-from desloppify.engine._plan.schema import empty_plan
 from desloppify.engine._plan.constants import QueueSyncResult
-
+from desloppify.engine._plan.schema import empty_plan
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -178,7 +176,9 @@ class TestApplyPlanReconciliation:
             "issue-1": _make_issue(status="resolved"),
             "issue-2": _make_issue(status="open"),
         })
-        from desloppify.engine._plan.scan_issue_reconcile import reconcile_plan_after_scan
+        from desloppify.engine._plan.scan_issue_reconcile import (
+            reconcile_plan_after_scan,
+        )
         result = reconcile_plan_after_scan(plan, state)
         assert "issue-1" in result.superseded
         assert "issue-1" in plan["superseded"]
@@ -191,7 +191,9 @@ class TestApplyPlanReconciliation:
         plan["queue_order"] = ["gone-id"]
         plan["overrides"] = {"gone-id": {"issue_id": "gone-id"}}
         state = _make_state(issues={})
-        from desloppify.engine._plan.scan_issue_reconcile import reconcile_plan_after_scan
+        from desloppify.engine._plan.scan_issue_reconcile import (
+            reconcile_plan_after_scan,
+        )
         result = reconcile_plan_after_scan(plan, state)
         assert "gone-id" in result.superseded
 

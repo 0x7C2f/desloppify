@@ -17,8 +17,8 @@ from desloppify.app.commands.helpers.runtime_options import (
 )
 from desloppify.cli import (
     _get_detector_names,
-    _running_installed_package_from_checkout,
     _resolve_default_path,
+    _running_installed_package_from_checkout,
     _warn_if_running_installed_package_from_checkout,
     create_parser,
     state_path,

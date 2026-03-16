@@ -4,7 +4,7 @@ Traditional tools catch mechanical issues — linters, formatters, dead code fin
 
 ## Directory Layout
 
-```
+```ascii
 desloppify/
 ├── cli.py              # Argparse, main()
 ├── state.py            # Compatibility facade (prefer state_io/state_scoring)
@@ -49,7 +49,7 @@ desloppify/
 
 ## Architecture
 
-```
+```ascii
 Layer 0: base/                   Foundational infrastructure. Path resolution, config, enums, output.
 Layer 1: engine/detectors/       Generic algorithms. Data-in, data-out. Zero language imports.
 Layer 2: languages/_framework/   Shared contracts/helpers. Normalize raw results → tiered findings.
@@ -73,7 +73,7 @@ Layer 4: app/                    CLI commands. Thin entry points delegating to e
 
 ## Data Flow
 
-```
+```ascii
 scan:    LangConfig → LangRun(phases) → generate_findings() → merge_scan() → state-{lang}.json
 plan:    state → reconcile → plan.json (ordered queue, clusters, deferred items)
 review:  state + plan → batch packets → LLM → import findings → merge

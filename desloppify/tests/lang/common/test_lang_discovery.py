@@ -10,7 +10,10 @@ import desloppify.base.registry as core_registry_mod
 import desloppify.engine._scoring.policy.core as scoring_policy_mod
 import desloppify.languages._framework.registry.discovery as discovery_mod
 import desloppify.languages._framework.registry.state as registry_state
-from desloppify.languages._framework.registry.discovery import load_all, raise_load_errors
+from desloppify.languages._framework.registry.discovery import (
+    load_all,
+    raise_load_errors,
+)
 
 
 def test_raise_load_errors_includes_module_name_and_exception_type(monkeypatch):

@@ -9,13 +9,13 @@ from pathlib import Path
 from typing import Any
 
 from desloppify.base.discovery.file_paths import rel, resolve_path
-from desloppify.base.search.grep import grep_files
-from desloppify.base.output.terminal import colorize, print_table
+from desloppify.base.discovery.paths import get_project_root
 from desloppify.base.discovery.source import (
     find_source_files,
     find_ts_and_tsx_files,
 )
-from desloppify.base.discovery.paths import get_project_root
+from desloppify.base.output.terminal import colorize, print_table
+from desloppify.base.search.grep import grep_files
 from desloppify.engine.detectors.graph import (
     detect_cycles,
     finalize_graph,

@@ -5,8 +5,8 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
-from desloppify.base.discovery.source import find_py_files
 from desloppify.base.discovery.paths import get_project_root
+from desloppify.base.discovery.source import find_py_files
 
 _IGNORED_SELF_ATTRS = {"logger"}
 

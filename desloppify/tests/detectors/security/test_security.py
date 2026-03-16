@@ -10,7 +10,9 @@ from unittest.mock import patch
 
 from desloppify.engine.detectors.security.detector import detect_security_issues
 from desloppify.engine.policy.zones import FileZoneMap, Zone
-from desloppify.languages.typescript.detectors.security.detector import detect_ts_security
+from desloppify.languages.typescript.detectors.security.detector import (
+    detect_ts_security,
+)
 
 # ── Helpers ──────────────────────────────────────────────────
 

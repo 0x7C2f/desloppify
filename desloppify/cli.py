@@ -11,16 +11,16 @@ from pathlib import Path
 from typing import Any
 
 from desloppify.app.cli_support.parser import create_parser as _create_parser
-from desloppify.app.commands.helpers.lang import resolve_lang
 from desloppify.app.commands.helpers.command_runtime import CommandRuntime
+from desloppify.app.commands.helpers.lang import resolve_lang
 from desloppify.app.commands.helpers.state import state_path
 from desloppify.app.commands.registry import CommandHandler, get_command_handlers
 from desloppify.base.config import load_config
+from desloppify.base.discovery.paths import get_default_scan_path, get_project_root
 from desloppify.base.discovery.source import set_exclusions
 from desloppify.base.exception_sets import CommandError
 from desloppify.base.output.fallbacks import log_best_effort_failure
 from desloppify.base.output.terminal import colorize
-from desloppify.base.discovery.paths import get_default_scan_path, get_project_root
 from desloppify.base.registry import detector_names, on_detector_registered
 from desloppify.base.runtime_state import runtime_scope
 from desloppify.languages import available_langs
@@ -65,7 +65,7 @@ def _get_detector_names() -> list[str]:
 def _invalidate_detector_names_cache() -> None:
     """Invalidate detector-name cache when runtime registrations change."""
     _get_detector_names_cached.cache_clear()
-    _DETECTOR_NAMES_CACHE.pop("names", None)
+    _DETECTOR_NAMES_CACHE.pop("names", None)  # type: ignore[func-returns-value]
 
 
 on_detector_registered(_invalidate_detector_names_cache)
@@ -81,14 +81,16 @@ def _apply_persisted_exclusions(
     config: Mapping[str, Any],
 ) -> None:
     """Merge CLI --exclude with persisted config.exclude and apply globally."""
-    cli_exclusions = getattr(args, "exclude", None) or []
+    cli_exclusions: list[str] = getattr(args, "exclude", None) or []
     persisted_raw = config.get("exclude", [])
-    persisted = (
+    persisted: list[str] = (
         [entry for entry in persisted_raw if isinstance(entry, str)]
         if isinstance(persisted_raw, list)
         else []
     )
-    combined = list(cli_exclusions) + [e for e in persisted if e not in cli_exclusions]
+    combined: list[str] = list(cli_exclusions) + [
+        e for e in persisted if e not in cli_exclusions
+    ]
     if not combined:
         return
     set_exclusions(combined)
@@ -99,9 +101,7 @@ def _apply_persisted_exclusions(
         )
         return
     print(
-        colorize(
-            f"  Excluding (from config): {', '.join(combined)}", "dim"
-        ),
+        colorize(f"  Excluding (from config): {', '.join(combined)}", "dim"),
         file=sys.stderr,
     )
 
@@ -143,7 +143,9 @@ def _resolve_default_path(args: argparse.Namespace) -> None:
                     args.path = str((runtime_root / saved_path).resolve())
                     return
         except (OSError, KeyError, ValueError, TypeError, AttributeError) as exc:
-            log_best_effort_failure(logger, "resolve default review path from saved state", exc)
+            log_best_effort_failure(
+                logger, "resolve default review path from saved state", exc
+            )
     lang = resolve_lang(args)
     args.path = str(
         get_default_scan_path(
@@ -190,7 +192,7 @@ def _running_installed_package_from_checkout(
         return False
     current_module = Path(module_file or __file__).resolve()
     try:
-        current_module.relative_to(root)
+        current_module.relative_to(root)  # type: ignore[func-returns-value]
         return False
     except ValueError:
         return True
@@ -203,8 +205,10 @@ def _warn_if_running_installed_package_from_checkout() -> None:
     root = get_project_root().resolve()
     print(
         colorize(
-            "  WARNING: running installed desloppify package while current directory "
-            "looks like the desloppify checkout.",
+            (
+                "  WARNING: running installed desloppify package while current directory "
+                "looks like the desloppify checkout."
+            ),
             "yellow",
         ),
         file=sys.stderr,
@@ -218,8 +222,10 @@ def _warn_if_running_installed_package_from_checkout() -> None:
     )
     print(
         colorize(
-            "  Use `python -m desloppify ...` or `./.venv/bin/desloppify ...` here "
-            "to run the local checkout instead of the installed package.",
+            (
+                "  Use `python -m desloppify ...` or `./.venv/bin/desloppify ...` here "
+                "to run the local checkout instead of the installed package."
+            ),
             "dim",
         ),
         file=sys.stderr,
@@ -238,7 +244,7 @@ def _handle_help_command(
     """Handle explicit help command when present in parser config."""
     topic = list(getattr(args, "topic", []) or [])
     try:
-        parser.parse_args([*topic, "--help"])
+        parser.parse_args([*topic, "--help"])  # type: ignore[func-returns-value]
     except SystemExit:
         return
 
@@ -248,7 +254,7 @@ def main() -> None:
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             try:
-                stream.reconfigure(encoding="utf-8", errors="replace")
+                stream.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[attr-defined]
             except (AttributeError, OSError):
                 logger.debug(
                     "Skipping stream reconfigure for %s (not supported)",
@@ -257,10 +263,11 @@ def main() -> None:
 
     parser = create_parser()
     args = parser.parse_args()
-    if not args.command:
+    command: str | None = getattr(args, "command", None)
+    if not command:
         parser.print_help()
         return
-    if args.command == "help":
+    if command == "help":
         _handle_help_command(args, parser)
         return
 
@@ -273,7 +280,7 @@ def main() -> None:
             _resolve_default_path(args)
             _load_shared_runtime(args)
 
-            handler = _resolve_handler(args.command)
+            handler = _resolve_handler(command)
             handler(args)
     except CommandError as exc:
         print(colorize(f"  {exc.message}", "red"), file=sys.stderr)

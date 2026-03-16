@@ -407,7 +407,7 @@ def test_generic_structural_phase_and_coupling_delegate(monkeypatch) -> None:
     )
 
     structural_phase = generic_structural_mod._make_structural_phase()
-    coupling_builder = lambda _path: {"graph": True}
+    coupling_builder = lambda _path: {"graph": True}  # type: ignore[E731]
     coupling_phase = generic_structural_mod._make_coupling_phase(coupling_builder)
 
     structural_issues, structural_potentials = structural_phase.run(Path("."), SimpleNamespace(file_finder=lambda _p: []))

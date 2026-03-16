@@ -8,16 +8,9 @@ from pathlib import Path
 from desloppify.app.commands.helpers.command_runtime import command_runtime
 from desloppify.app.commands.helpers.state import require_issue_inventory, state_path
 from desloppify.app.commands.plan.shared.patterns import resolve_ids_from_patterns
-from .io import (
-    _plan_file_for_state,
-    save_plan_state_transactional,
-)
 from desloppify.base.output.terminal import colorize
-from desloppify.engine.plan_state import (
-    load_plan,
-    purge_uncommitted_ids,
-    save_plan,
-)
+from desloppify.engine._plan.refresh_lifecycle import clear_postflight_scan_completion
+from desloppify.engine._state.resolution import resolve_issues
 from desloppify.engine.plan_ops import (
     annotate_issue,
     append_log_entry,
@@ -25,9 +18,17 @@ from desloppify.engine.plan_ops import (
     describe_issue,
     set_focus,
 )
-from desloppify.engine._plan.refresh_lifecycle import clear_postflight_scan_completion
-from desloppify.engine._state.resolution import resolve_issues
+from desloppify.engine.plan_state import (
+    load_plan,
+    purge_uncommitted_ids,
+    save_plan,
+)
 from desloppify.state_io import load_state
+
+from .io import (
+    _plan_file_for_state,
+    save_plan_state_transactional,
+)
 
 
 def cmd_plan_describe(args: argparse.Namespace) -> None:

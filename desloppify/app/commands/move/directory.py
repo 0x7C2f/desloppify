@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from desloppify.languages import framework as lang_mod
 from desloppify.app.commands.helpers.lang import resolve_lang
 from desloppify.app.commands.move.apply import apply_directory_move
 from desloppify.app.commands.move.language import (
@@ -22,6 +21,7 @@ from desloppify.app.commands.move.reporting import print_directory_move_plan
 from desloppify.base.discovery.file_paths import rel
 from desloppify.base.exception_sets import CommandError
 from desloppify.base.output.terminal import colorize
+from desloppify.languages import framework as lang_mod
 
 
 def run_directory_move(args, source_abs: str, resolve_path_fn) -> None:

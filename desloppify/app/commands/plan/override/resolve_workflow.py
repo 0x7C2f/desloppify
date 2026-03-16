@@ -12,22 +12,12 @@ from desloppify.app.commands.plan.triage.review_coverage import (
     ensure_active_triage_issue_ids,
     has_open_review_issues,
 )
-from desloppify.base.config import target_strict_score_from_config
-from .resolve_helpers import blocked_triage_stages
 from desloppify.app.commands.plan.triage.stage_queue import (
     has_triage_in_queue,
     inject_triage_stages,
 )
+from desloppify.base.config import target_strict_score_from_config
 from desloppify.base.output.terminal import colorize
-from desloppify.engine.plan_state import (
-    load_plan,
-    save_plan,
-)
-from desloppify.engine.plan_ops import (
-    append_log_entry,
-    auto_complete_steps,
-    purge_ids,
-)
 from desloppify.engine._plan.constants import (
     WORKFLOW_CREATE_PLAN_ID,
     WORKFLOW_SCORE_CHECKPOINT_ID,
@@ -38,10 +28,21 @@ from desloppify.engine._plan.refresh_lifecycle import (
     set_lifecycle_phase,
 )
 from desloppify.engine._plan.sync import live_planned_queue_empty, reconcile_plan
+from desloppify.engine.plan_ops import (
+    append_log_entry,
+    auto_complete_steps,
+    purge_ids,
+)
+from desloppify.engine.plan_state import (
+    load_plan,
+    save_plan,
+)
 from desloppify.engine.plan_triage import (
     triage_manual_stage_command,
     triage_runner_commands,
 )
+
+from .resolve_helpers import blocked_triage_stages
 
 WORKFLOW_GATE_IDS = frozenset({WORKFLOW_SCORE_CHECKPOINT_ID, WORKFLOW_CREATE_PLAN_ID})
 

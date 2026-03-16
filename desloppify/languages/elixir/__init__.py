@@ -1,7 +1,10 @@
 """Elixir language plugin — mix credo with Elixir-aware zone rules."""
 
 from desloppify.engine.policy.zones import COMMON_ZONE_RULES, Zone, ZoneRule
-from desloppify.languages._framework.generic_support.core import generic_lang, GenericLangOptions
+from desloppify.languages._framework.generic_support.core import (
+    GenericLangOptions,
+    generic_lang,
+)
 from desloppify.languages._framework.treesitter import ELIXIR_SPEC
 
 ELIXIR_ZONE_RULES = [

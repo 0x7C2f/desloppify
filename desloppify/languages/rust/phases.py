@@ -20,17 +20,22 @@ from desloppify.engine.policy.zones import adjust_potential, filter_entries
 from desloppify.languages._framework.base.shared_phases import (
     run_structural_phase,
 )
-from desloppify.languages._framework.base.types import DetectorPhase, LangRuntimeContract
+from desloppify.languages._framework.base.types import (
+    DetectorPhase,
+    LangRuntimeContract,
+)
+from desloppify.languages._framework.generic_parts.tool_factories import (
+    _record_tool_failure_coverage,
+)
+from desloppify.languages._framework.generic_parts.tool_runner import (
+    ToolRunResult,
+    run_tool_result,
+)
 from desloppify.languages._framework.issue_factories import (
     make_cycle_issues,
     make_orphaned_issues,
     make_single_use_issues,
 )
-from desloppify.languages._framework.generic_parts.tool_factories import (
-    _record_tool_failure_coverage,
-)
-from desloppify.languages._framework.generic_parts.tool_runner import ToolRunResult
-from desloppify.languages._framework.generic_parts.tool_runner import run_tool_result
 from desloppify.languages.rust.detectors import (
     detect_async_locking,
     detect_doctest_hygiene,
@@ -46,8 +51,14 @@ from desloppify.languages.rust.detectors import (
 from desloppify.languages.rust.detectors.deps import build_dep_graph
 from desloppify.languages.rust.tools import (
     CARGO_ERROR_CMD as RUST_CHECK_CMD,
+)
+from desloppify.languages.rust.tools import (
     CLIPPY_WARNING_CMD as RUST_CLIPPY_CMD,
+)
+from desloppify.languages.rust.tools import (
     RUSTDOC_WARNING_CMD as RUST_RUSTDOC_CMD,
+)
+from desloppify.languages.rust.tools import (
     parse_cargo_errors,
     parse_clippy_messages,
     run_rustdoc_result,

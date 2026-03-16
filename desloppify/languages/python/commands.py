@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from desloppify.base.discovery.file_paths import rel
-
 from desloppify.base.discovery.source import find_py_files
 from desloppify.base.output.terminal import colorize, display_entries, print_table
 from desloppify.engine.detectors import dupes as dupes_detector_mod

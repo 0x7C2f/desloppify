@@ -4,12 +4,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from desloppify.state_scoring import score_snapshot
 from desloppify.engine._plan.auto_cluster import auto_cluster_issues
 from desloppify.engine._plan.constants import QueueSyncResult, is_synthetic_id
 from desloppify.engine._plan.operations.meta import append_log_entry
-from desloppify.engine._plan.policy.subjective import compute_subjective_visibility
 from desloppify.engine._plan.policy.stale import open_review_ids
+from desloppify.engine._plan.policy.subjective import compute_subjective_visibility
 from desloppify.engine._plan.refresh_lifecycle import (
     LIFECYCLE_PHASE_ASSESSMENT_POSTFLIGHT,
     LIFECYCLE_PHASE_REVIEW_INITIAL,
@@ -23,13 +22,14 @@ from desloppify.engine._plan.refresh_lifecycle import (
 from desloppify.engine._plan.sync.dimensions import sync_subjective_dimensions
 from desloppify.engine._plan.sync.phase_cleanup import prune_synthetic_for_phase
 from desloppify.engine._plan.sync.triage import sync_triage_needed
-from desloppify.engine._plan.triage.snapshot import build_triage_snapshot
 from desloppify.engine._plan.sync.workflow import (
     ScoreSnapshot,
     _subjective_review_current_for_cycle,
     sync_communicate_score_needed,
     sync_create_plan_needed,
 )
+from desloppify.engine._plan.triage.snapshot import build_triage_snapshot
+from desloppify.state_scoring import score_snapshot
 
 
 @dataclass

@@ -11,7 +11,6 @@ from desloppify.languages.rust._fixers import (
     fix_missing_features,
     fix_readme_doctests,
 )
-from desloppify.languages.rust.phases import phase_signature
 from desloppify.languages.rust.detectors.api import (
     detect_error_boundaries,
     detect_future_proofing,
@@ -28,6 +27,7 @@ from desloppify.languages.rust.detectors.safety import (
     detect_drop_safety,
     detect_unsafe_api_usage,
 )
+from desloppify.languages.rust.phases import phase_signature
 
 
 def _write(path: Path, rel_path: str, content: str) -> Path:

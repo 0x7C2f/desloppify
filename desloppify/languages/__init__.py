@@ -9,13 +9,6 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import TypeVar
 
-from desloppify.languages.framework import (
-    LangConfig,
-    auto_detect_lang,
-    available_langs,
-    get_lang,
-    make_lang_config,
-)
 from desloppify.languages._framework.contract_validation import validate_lang_contract
 from desloppify.languages._framework.policy import REQUIRED_DIRS, REQUIRED_FILES
 from desloppify.languages._framework.registry.discovery import load_all
@@ -24,6 +17,13 @@ from desloppify.languages._framework.registry.registration import (
 )
 from desloppify.languages._framework.registry.state import all_keys, register
 from desloppify.languages._framework.structure_validation import validate_lang_structure
+from desloppify.languages.framework import (
+    LangConfig,
+    auto_detect_lang,
+    available_langs,
+    get_lang,
+    make_lang_config,
+)
 
 T = TypeVar("T")
 

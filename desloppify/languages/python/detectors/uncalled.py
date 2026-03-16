@@ -15,7 +15,6 @@ import os
 from pathlib import Path
 
 from desloppify.base.discovery.file_paths import rel
-
 from desloppify.base.discovery.source import read_file_text
 
 # Entry-point files where unused private functions are expected.
